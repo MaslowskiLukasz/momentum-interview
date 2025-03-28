@@ -445,6 +445,8 @@ function toggleFavoriteTeam(team) {
         :selectedTeam="selectedTeam"
         :favoriteTeamId="favoriteTeamId"
         :teamMatches="teamMatches"
+        @goBack="selectedTeam = null"
+        @toggleFavoriteTeam="toggleFavoriteTeam"
       />
     </main>
 

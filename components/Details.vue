@@ -5,6 +5,8 @@ const { selectedTeam, favoriteTeamId, teamMatches } = defineProps([
   'teamMatches',
 ]);
 
+const emit = defineEmits(['goBack', 'toggleFavoriteTeam']);
+
 const isLoadingMatches = ref(false);
 const isEditingResult = ref(false);
 const editHomeScore = ref(0);
@@ -17,10 +19,6 @@ const gamesPlayed = computed(() => {
     return team.wins + team.draws + team.losses;
   };
 });
-
-function toggleFavoriteTeam(team) {
-  console.log(`toggle favorite team ${JSON.stringify(team)}`);
-}
 
 function startEditingTeamDetails() {
   console.log(`start editing team details`);
@@ -43,7 +41,7 @@ function saveMatchResult() {
   <div class="team-details py-6">
     <div class="flex justify-between items-center mb-6">
       <button
-        @click="selectedTeam = null"
+        @click="emit('goBack')"
         class="flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
       >
         <svg
@@ -65,7 +63,7 @@ function saveMatchResult() {
 
       <!-- Favorite Button in Team Details -->
       <button
-        @click.stop="toggleFavoriteTeam(selectedTeam)"
+        @click.stop="emit('toggleFavoriteTeam', selectedTeam)"
         class="flex items-center px-3 py-2 rounded-md transition-colors"
         :class="{
           'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200':
