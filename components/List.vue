@@ -1,5 +1,6 @@
 <script setup>
 const { teams, favoriteTeamId } = defineProps(['teams', 'favoriteTeamId']);
+const emit = defineEmits(['selectTeam', 'toggleFavoriteTeam']);
 
 const sortBy = ref('position'); // Default sort field
 const sortDirection = ref('asc'); // Default sort direction
@@ -55,11 +56,11 @@ function toggleSortDirection(field) {
 }
 
 function selectTeam(team) {
-  console.log(`selected team ${JSON.stringify(team)}`);
+  emit('selectTeam', team);
 }
 
-function toggleFavoriteTeam(team, $event) {
-  console.log(`toggledFavoriteTeam ${JSON.stringify(team)}`);
+function toggleFavoriteTeam(team) {
+  emit('toggleFavoriteTeam', team);
 }
 </script>
 
@@ -366,7 +367,7 @@ function toggleFavoriteTeam(team, $event) {
               </div>
               <!-- Favorite Star -->
               <button
-                @click="toggleFavoriteTeam(team, $event)"
+                @click.stop="toggleFavoriteTeam(team)"
                 class="ml-2 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                 :class="{
                   'bg-yellow-500 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200':

@@ -400,12 +400,7 @@ function saveTeamDetails() {
   isEditingTeamDetails.value = false;
 }
 
-function toggleFavoriteTeam(team, event) {
-  // Stop event propagation to prevent navigating to team details
-  if (event) {
-    event.stopPropagation();
-  }
-
+function toggleFavoriteTeam(team) {
   if (favoriteTeamId.value === team.id) {
     // If clicking the current favorite, remove it
     favoriteTeamId.value = null;
@@ -445,6 +440,8 @@ function toggleFavoriteTeam(team, event) {
         v-if="!selectedTeam && !isLoading"
         :teams="teams"
         :favoriteTeamId="favoriteTeamId"
+        @selectTeam="selectTeam"
+        @toggleFavoriteTeam="toggleFavoriteTeam"
       />
 
       <!-- Favorite Team Section (only shown when a favorite team is selected) -->
@@ -613,7 +610,7 @@ function toggleFavoriteTeam(team, event) {
 
           <!-- Favorite Button in Team Details -->
           <button
-            @click="toggleFavoriteTeam(selectedTeam, $event)"
+            @click.stop="toggleFavoriteTeam(selectedTeam)"
             class="flex items-center px-3 py-2 rounded-md transition-colors"
             :class="{
               'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200':
