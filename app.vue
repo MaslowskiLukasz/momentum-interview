@@ -416,15 +416,7 @@ function toggleFavoriteTeam(team) {
 <template>
   <div class="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
     <!-- Header -->
-    <header class="bg-white dark:bg-blue-800 shadow-md">
-      <div class="container mx-auto px-4 py-4">
-        <div class="flex justify-between items-center">
-          <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
-            Polish Football League
-          </h1>
-        </div>
-      </div>
-    </header>
+    <Header />
 
     <main class="container mx-auto grow px-4 py-8">
       <!-- Loading State -->
