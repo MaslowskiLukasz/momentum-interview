@@ -3,7 +3,9 @@ import { defineStore } from "pinia";
 export const useMatchesStore = defineStore('matches', () => {
   const allMatches = ref([]);
   const store = useTeamsStore();
-  const {teams} = storeToRefs(store);
+  const { teams } = storeToRefs(store);
+
+  const teamMatches = ref([]);
 
   function getTeamMatches(teamId, limit = null) {
     if (!teamId || !allMatches.value.length) return [];
@@ -58,5 +60,5 @@ export const useMatchesStore = defineStore('matches', () => {
     });
   }
 
-  return { allMatches, getTeamMatches }
+  return { allMatches, getTeamMatches, teamMatches }
 });

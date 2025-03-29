@@ -2,9 +2,7 @@
 import { ref, onMounted, computed } from 'vue';
 import { useMatchesStore } from './stores/matches';
 
-const selectedTeam = ref(null);
 const isLoading = ref(false);
-const teamMatches = ref([]);
 const isLoadingMatches = ref(false);
 const editingMatch = ref(null);
 const isEditingResult = ref(false);
@@ -17,10 +15,10 @@ const editStadium = ref('');
 const favoriteTeamId = ref(null);
 
 const teamsStore = useTeamsStore();
-const { teams } = storeToRefs(teamsStore);
+const { teams, selectedTeam } = storeToRefs(teamsStore);
 
 const matchesStore = useMatchesStore();
-const { allMatches } = storeToRefs(matchesStore);
+const { allMatches, teamMatches } = storeToRefs(matchesStore);
 const { getTeamMatches } = matchesStore;
 
 // Add a new computed property for favorite team data
@@ -316,9 +314,7 @@ function toggleFavoriteTeam(team) {
       <!-- Team Details -->
       <Details
         v-else-if="selectedTeam"
-        :selectedTeam="selectedTeam"
         :favoriteTeamId="favoriteTeamId"
-        :teamMatches="teamMatches"
         @goBack="selectedTeam = null"
         @toggleFavoriteTeam="toggleFavoriteTeam"
       />
