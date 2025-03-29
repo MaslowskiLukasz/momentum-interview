@@ -1,12 +1,11 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
+import { useMatchesStore } from './stores/matches';
 
 const selectedTeam = ref(null);
 const isLoading = ref(false);
-const teams = ref([]);
 const teamMatches = ref([]);
 const isLoadingMatches = ref(false);
-const allMatches = ref([]); // Store all matches from the data file
 const editingMatch = ref(null);
 const isEditingResult = ref(false);
 const editHomeScore = ref(0);
@@ -17,72 +16,18 @@ const editCoach = ref('');
 const editStadium = ref('');
 const favoriteTeamId = ref(null);
 
+const teamsStore = useTeamsStore();
+const { teams } = storeToRefs(teamsStore);
+
+const matchesStore = useMatchesStore();
+const { allMatches } = storeToRefs(matchesStore);
+const { getTeamMatches } = matchesStore;
+
 // Add a new computed property for favorite team data
 const favoriteTeam = computed(() => {
   if (!favoriteTeamId.value || !teams.value.length) return null;
   return teams.value.find((team) => team.id === favoriteTeamId.value);
 });
-
-// Computed property to calculate games played for each team
-const gamesPlayed = computed(() => {
-  return (team) => {
-    return team.wins + team.draws + team.losses;
-  };
-});
-
-// Combine the two match-getting functions into one with an optional limit parameter
-function getTeamMatches(teamId, limit = null) {
-  if (!teamId || !allMatches.value.length) return [];
-
-  // Filter matches for the team
-  const matches = allMatches.value.filter(
-    (match) => match.homeTeamId === teamId || match.awayTeamId === teamId
-  );
-
-  // Sort matches by date (most recent first)
-  const sortedMatches = [...matches].sort(
-    (a, b) => new Date(b.date) - new Date(a.date)
-  );
-
-  // Apply limit if provided
-  const limitedMatches = limit ? sortedMatches.slice(0, limit) : sortedMatches;
-
-  // Format matches for display
-  return limitedMatches.map((match) => {
-    const isHome = match.homeTeamId === teamId;
-    const homeTeamObj = teams.value.find((t) => t.id === match.homeTeamId);
-    const awayTeamObj = teams.value.find((t) => t.id === match.awayTeamId);
-
-    // Determine result for the team
-    let result;
-    if (isHome) {
-      result =
-        match.homeScore > match.awayScore
-          ? 'W'
-          : match.homeScore < match.awayScore
-          ? 'L'
-          : 'D';
-    } else {
-      result =
-        match.awayScore > match.homeScore
-          ? 'W'
-          : match.awayScore < match.homeScore
-          ? 'L'
-          : 'D';
-    }
-
-    return {
-      id: match.id,
-      date: match.date,
-      homeTeam: homeTeamObj?.name || 'Unknown Team',
-      awayTeam: awayTeamObj?.name || 'Unknown Team',
-      homeScore: match.homeScore,
-      awayScore: match.awayScore,
-      result,
-      isHome,
-    };
-  });
-}
 
 // Update the computed property to use the new function
 const favoriteTeamRecentMatches = computed(() => {
@@ -141,77 +86,6 @@ const fetchTeams = async () => {
     isLoading.value = false;
   }
 };
-
-// Calculate team statistics based on matches
-function calculateTeamStats(teamsData, matches) {
-  // Create a map to store team stats
-  const teamStats = {};
-
-  // Initialize stats for each team - ensure points start at exactly 0
-  teamsData.forEach((team) => {
-    teamStats[team.id] = {
-      ...team,
-      points: 0, // Explicitly set to 0 to override any existing value
-      wins: 0,
-      draws: 0,
-      losses: 0,
-      goalsFor: 0,
-      goalsAgainst: 0,
-      recentForm: [],
-    };
-  });
-
-  // Process each match to update team stats
-  matches.forEach((match) => {
-    const homeTeam = teamStats[match.homeTeamId];
-    const awayTeam = teamStats[match.awayTeamId];
-
-    if (!homeTeam || !awayTeam) return; // Skip if team not found
-
-    // Update goals
-    homeTeam.goalsFor += match.homeScore;
-    homeTeam.goalsAgainst += match.awayScore;
-    awayTeam.goalsFor += match.awayScore;
-    awayTeam.goalsAgainst += match.homeScore;
-
-    // Determine result and update points
-    if (match.homeScore > match.awayScore) {
-      // Home team wins
-      homeTeam.wins += 1;
-      homeTeam.points += 3; // 3 points for a win
-      homeTeam.recentForm.unshift('W');
-      awayTeam.losses += 1;
-      // No points for a loss (0)
-      awayTeam.recentForm.unshift('L');
-    } else if (match.homeScore < match.awayScore) {
-      // Away team wins
-      awayTeam.wins += 1;
-      awayTeam.points += 3; // 3 points for a win
-      awayTeam.recentForm.unshift('W');
-      homeTeam.losses += 1;
-      // No points for a loss (0)
-      homeTeam.recentForm.unshift('L');
-    } else {
-      // Draw
-      homeTeam.draws += 1;
-      homeTeam.points += 1; // 1 point for a draw
-      homeTeam.recentForm.unshift('D');
-      awayTeam.draws += 1;
-      awayTeam.points += 1; // 1 point for a draw
-      awayTeam.recentForm.unshift('D');
-    }
-  });
-
-  // Limit recent form to last 5 matches and reverse for display (most recent on right)
-  Object.values(teamStats).forEach((team) => {
-    team.recentForm = team.recentForm.slice(0, 5).reverse();
-
-    // Final points calculation to ensure accuracy
-    team.points = team.wins * 3 + team.draws;
-  });
-
-  return Object.values(teamStats);
-}
 
 onMounted(() => {
   fetchTeams();
