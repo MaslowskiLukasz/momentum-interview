@@ -1,5 +1,8 @@
 <script setup>
-const { favoriteTeamId } = defineProps(['favoriteTeamId']);
+const { favoriteTeamId, isLoadingMatches } = defineProps([
+  'favoriteTeamId',
+  'isLoadingMatches',
+]);
 
 const emit = defineEmits(['goBack', 'toggleFavoriteTeam']);
 
@@ -9,7 +12,6 @@ const teamsStore = useTeamsStore();
 const { allMatches, teamMatches } = storeToRefs(matchesStore);
 const { teams, selectedTeam } = storeToRefs(teamsStore);
 
-const isLoadingMatches = ref(false);
 const isEditingResult = ref(false);
 const editHomeScore = ref(0);
 const editAwayScore = ref(0);
@@ -24,6 +26,11 @@ const gamesPlayed = computed(() => {
 
 function startEditingTeamDetails() {
   console.log(`start editing team details`);
+  // if (!selectedTeam.value) return;
+
+  // editCoach.value = selectedTeam.value.coach;
+  // editStadium.value = selectedTeam.value.stadium;
+  // isEditingTeamDetails.value = true;
 }
 
 function startEditingMatch(match) {
