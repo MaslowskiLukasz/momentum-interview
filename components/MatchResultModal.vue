@@ -38,35 +38,9 @@ const emit = defineEmits(['cancel', 'save']);
         </div>
 
         <div class="flex items-center justify-center space-x-4">
-          <div>
-            <label
-              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-              >Home Score</label
-            >
-            <input
-              v-model.number="homeScore"
-              type="number"
-              min="0"
-              max="7"
-              class="w-16 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-            />
-          </div>
-
+          <ScoreInput label="Home Score" v-model="homeScore" />
           <div class="text-xl font-bold dark:text-white">-</div>
-
-          <div>
-            <label
-              class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-              >Away Score</label
-            >
-            <input
-              v-model.number="awayScore"
-              type="number"
-              min="0"
-              max="7"
-              class="w-16 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-            />
-          </div>
+          <ScoreInput label="Away Score" v-model="awayScore" />
         </div>
       </div>
 
