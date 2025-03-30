@@ -138,12 +138,8 @@ function toggleFavoriteTeam(team) {
             'bg-blue-50 dark:bg-blue-900/20': favoriteTeamId === team.id,
           }"
         >
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm font-medium text-gray-900 dark:text-white">
-              {{ team.position }}
-            </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
+          <TableCell :text="team.position" />
+          <TableCell>
             <div class="flex items-center">
               <div class="text-sm font-medium text-gray-900 dark:text-white">
                 {{ team.name }}
@@ -154,43 +150,15 @@ function toggleFavoriteTeam(team) {
                 @toggleFavorite="toggleFavoriteTeam(team)"
               />
             </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm font-medium text-gray-900 dark:text-white">
-              {{ team.points }}
-            </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm font-medium text-gray-900 dark:text-white">
-              {{ gamesPlayed(team) }}
-            </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm font-medium text-gray-900 dark:text-white">
-              {{ team.wins }}
-            </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm font-medium text-gray-900 dark:text-white">
-              {{ team.draws }}
-            </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm font-medium text-gray-900 dark:text-white">
-              {{ team.losses }}
-            </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm font-medium text-gray-900 dark:text-white">
-              {{ team.goalsFor }}
-            </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
-            <div class="text-sm font-medium text-gray-900 dark:text-white">
-              {{ team.goalsAgainst }}
-            </div>
-          </td>
-          <td class="px-6 py-4 whitespace-nowrap">
+          </TableCell>
+          <TableCell :text="team.points" />
+          <TableCell :text="gamesPlayed(team)" />
+          <TableCell :text="team.wins" />
+          <TableCell :text="team.draws" />
+          <TableCell :text="team.losses" />
+          <TableCell :text="team.goalsFor" />
+          <TableCell :text="team.goalsAgainst" />
+          <TableCell>
             <div class="flex space-x-1">
               <span
                 v-for="(result, index) in team.recentForm"
@@ -205,7 +173,7 @@ function toggleFavoriteTeam(team) {
                 {{ result }}
               </span>
             </div>
-          </td>
+          </TableCell>
         </tr>
       </tbody>
     </table>
