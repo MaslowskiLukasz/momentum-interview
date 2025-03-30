@@ -6,14 +6,8 @@ const emit = defineEmits(['cancel', 'save']);
 </script>
 
 <template>
-  <div
-    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-  >
-    <div
-      class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 max-w-md w-full"
-    >
-      <h3 class="text-xl font-bold mb-4 dark:text-white">Edit Team Details</h3>
-
+  <Modal title="Edit Team Details">
+    <template #content>
       <div class="space-y-4 mb-6">
         <div>
           <label
@@ -41,21 +35,20 @@ const emit = defineEmits(['cancel', 'save']);
           />
         </div>
       </div>
-
-      <div class="flex justify-end space-x-3">
-        <button
-          @click="emit('cancel')"
-          class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none"
-        >
-          Cancel
-        </button>
-        <button
-          @click="emit('save')"
-          class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
-        >
-          Save Details
-        </button>
-      </div>
-    </div>
-  </div>
+    </template>
+    <template #controls>
+      <button
+        @click="emit('cancel')"
+        class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none"
+      >
+        Cancel
+      </button>
+      <button
+        @click="emit('save')"
+        class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+      >
+        Save Details
+      </button>
+    </template>
+  </Modal>
 </template>
