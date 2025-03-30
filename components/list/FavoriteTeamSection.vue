@@ -31,28 +31,19 @@ function selectTeam(team) {
       </div>
 
       <div class="p-6">
-        <div
-          v-if="favoriteTeamRecentMatches.length === 0"
-          class="text-center py-4 text-gray-500 dark:text-gray-400"
-        >
+        <NoMatches v-if="favoriteTeamRecentMatches.length === 0">
           No recent matches available
-        </div>
+        </NoMatches>
         <div v-else>
           <!-- Recent Form Display -->
           <div class="mt-2">
             <div class="flex space-x-3">
-              <span
+              <MatchResult
                 v-for="(match, index) in favoriteTeamRecentMatches"
                 :key="index"
-                class="w-10 h-10 flex items-center justify-center text-white text-sm font-bold rounded-full"
-                :class="{
-                  'bg-green-500': match.result === 'W',
-                  'bg-red-500': match.result === 'L',
-                  'bg-yellow-500': match.result === 'D',
-                }"
-              >
-                {{ match.result }}
-              </span>
+                :result="match.result"
+                :size="10"
+              />
             </div>
             <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
               Most recent match on the right
@@ -123,16 +114,7 @@ function selectTeam(team) {
                       <span class="text-gray-900 dark:text-white font-medium">
                         {{ match.homeScore }} - {{ match.awayScore }}
                       </span>
-                      <span
-                        class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold rounded-full"
-                        :class="{
-                          'bg-green-500': match.result === 'W',
-                          'bg-red-500': match.result === 'L',
-                          'bg-yellow-500': match.result === 'D',
-                        }"
-                      >
-                        {{ match.result }}
-                      </span>
+                      <MatchResult :result="match.result" />
                     </div>
                   </td>
                 </tr>
