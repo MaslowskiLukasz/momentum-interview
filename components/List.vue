@@ -81,29 +81,10 @@ function toggleFavoriteTeam(team) {
           >
             <div class="flex items-center space-x-1">
               <span>Pos</span>
-              <svg
+              <SortChevron
                 v-if="sortBy === 'position'"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  v-if="sortDirection === 'asc'"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 15l7-7 7 7"
-                />
-                <path
-                  v-else
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
+                :direction="sortDirection"
+              />
             </div>
           </th>
           <th
@@ -113,29 +94,10 @@ function toggleFavoriteTeam(team) {
           >
             <div class="flex items-center space-x-1">
               <span>Team</span>
-              <svg
+              <SortChevron
                 v-if="sortBy === 'name'"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  v-if="sortDirection === 'asc'"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 15l7-7 7 7"
-                />
-                <path
-                  v-else
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
+                :direction="sortDirection"
+              />
             </div>
           </th>
           <th
@@ -145,29 +107,10 @@ function toggleFavoriteTeam(team) {
           >
             <div class="flex items-center space-x-1">
               <span>Points</span>
-              <svg
+              <SortChevron
                 v-if="sortBy === 'points'"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  v-if="sortDirection === 'asc'"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 15l7-7 7 7"
-                />
-                <path
-                  v-else
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
+                :direction="sortDirection"
+              />
             </div>
           </th>
           <th
@@ -185,29 +128,10 @@ function toggleFavoriteTeam(team) {
           >
             <div class="flex items-center space-x-1">
               <span>W</span>
-              <svg
+              <SortChevron
                 v-if="sortBy === 'wins'"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  v-if="sortDirection === 'asc'"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 15l7-7 7 7"
-                />
-                <path
-                  v-else
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
+                :direction="sortDirection"
+              />
             </div>
           </th>
           <th
@@ -217,29 +141,10 @@ function toggleFavoriteTeam(team) {
           >
             <div class="flex items-center space-x-1">
               <span>D</span>
-              <svg
+              <SortChevron
                 v-if="sortBy === 'draws'"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  v-if="sortDirection === 'asc'"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 15l7-7 7 7"
-                />
-                <path
-                  v-else
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
+                :direction="sortDirection"
+              />
             </div>
           </th>
           <th
@@ -249,29 +154,10 @@ function toggleFavoriteTeam(team) {
           >
             <div class="flex items-center space-x-1">
               <span>L</span>
-              <svg
+              <SortChevron
                 v-if="sortBy === 'losses'"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  v-if="sortDirection === 'asc'"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 15l7-7 7 7"
-                />
-                <path
-                  v-else
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
+                :direction="sortDirection"
+              />
             </div>
           </th>
           <th
@@ -281,29 +167,10 @@ function toggleFavoriteTeam(team) {
           >
             <div class="flex items-center space-x-1">
               <span>GF</span>
-              <svg
+              <SortChevron
                 v-if="sortBy === 'goalsFor'"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  v-if="sortDirection === 'asc'"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 15l7-7 7 7"
-                />
-                <path
-                  v-else
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
+                :direction="sortDirection"
+              />
             </div>
           </th>
           <th
@@ -313,29 +180,10 @@ function toggleFavoriteTeam(team) {
           >
             <div class="flex items-center space-x-1">
               <span>GA</span>
-              <svg
+              <SortChevron
                 v-if="sortBy === 'goalsAgainst'"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  v-if="sortDirection === 'asc'"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 15l7-7 7 7"
-                />
-                <path
-                  v-else
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
+                :direction="sortDirection"
+              />
             </div>
           </th>
           <th
