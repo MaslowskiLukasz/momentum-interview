@@ -152,18 +152,11 @@ function toggleSortDirection(field) {
           <TableCell :text="team.goalsAgainst" />
           <TableCell>
             <div class="flex space-x-1">
-              <span
+              <MatchResult
                 v-for="(result, index) in team.recentForm"
+                :result="result"
                 :key="index"
-                class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold rounded-full"
-                :class="{
-                  'bg-green-500': result === 'W',
-                  'bg-red-500': result === 'L',
-                  'bg-yellow-500': result === 'D',
-                }"
-              >
-                {{ result }}
-              </span>
+              />
             </div>
           </TableCell>
         </tr>
