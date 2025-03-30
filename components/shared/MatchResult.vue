@@ -1,5 +1,5 @@
 <script setup>
-const { result } = defineProps(['result']);
+const { result, size = 6 } = defineProps(['result', 'size']);
 
 const color = computed(() => {
   switch (result) {
@@ -15,8 +15,8 @@ const color = computed(() => {
 
 <template>
   <span
-    class="w-6 h-6 flex items-center justify-center text-white text-xs font-bold rounded-full"
-    :class="color"
+    class="flex items-center justify-center text-white text-xs font-bold rounded-full"
+    :class="[color, `w-${size} h-${size}`]"
   >
     {{ result }}
   </span>
