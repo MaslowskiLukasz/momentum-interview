@@ -21,12 +21,6 @@ const isEditingTeamDetails = ref(false);
 const editCoach = ref('');
 const editStadium = ref('');
 
-const gamesPlayed = computed(() => {
-  return (team) => {
-    return team.wins + team.draws + team.losses;
-  };
-});
-
 function startEditingTeamDetails() {
   if (!selectedTeam.value) return;
 
@@ -218,14 +212,9 @@ function saveTeamDetails() {
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
       <TeamDetailsHeader :team="selectedTeam" />
       <TeamInfo :team="selectedTeam" @editTeamInfo="startEditingTeamDetails" />
-
-      <!-- Match History Section -->
       <div class="p-6 border-t border-gray-200 dark:border-gray-700">
         <h3 class="text-xl font-semibold mb-4 dark:text-white">All Matches</h3>
-
-        <!-- Success Message -->
         <SuccessBanner v-if="showEditSuccess" />
-        <!-- Loading State -->
         <div
           v-if="isLoadingMatches"
           class="flex justify-center items-center py-8"
@@ -234,19 +223,10 @@ function saveTeamDetails() {
             class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"
           ></div>
         </div>
-
-        <!-- No Matches -->
         <NoMatches v-else-if="teamMatches.length === 0" />
-
-        <!-- Matches List -->
         <div v-else>
-          <!-- Recent Form Display -->
           <RecentForm :matches="selectedTeam.recentForm" />
-
-          <!-- Match Statistics Summary -->
           <SeasonSummary :team="selectedTeam" />
-
-          <!-- All Matches Table -->
           <MatchesTable
             :matches="teamMatches"
             @editMatch="(match) => startEditingMatch(match)"
@@ -256,7 +236,6 @@ function saveTeamDetails() {
     </div>
   </div>
 
-  <!-- Match Editing Modal -->
   <MatchResultModal
     v-if="isEditingResult"
     v-model:homeScore="editHomeScore"
@@ -266,7 +245,6 @@ function saveTeamDetails() {
     @save="saveMatchResult"
   />
 
-  <!-- Add this modal for editing team details -->
   <TeamDetailsModal
     v-if="isEditingTeamDetails"
     v-model:coach="editCoach"
