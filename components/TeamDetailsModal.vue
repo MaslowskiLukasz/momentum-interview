@@ -9,31 +9,12 @@ const emit = defineEmits(['cancel', 'save']);
   <Modal title="Edit Team Details">
     <template #content>
       <div class="space-y-4 mb-6">
-        <div>
-          <label
-            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-            >Coach</label
-          >
-          <input
-            v-model="coach"
-            type="text"
-            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-            placeholder="Coach name"
-          />
-        </div>
-
-        <div>
-          <label
-            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-            >Stadium</label
-          >
-          <input
-            v-model="stadium"
-            type="text"
-            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
-            placeholder="Stadium name"
-          />
-        </div>
+        <TextInput label="Coach" placeholder="Coach name" v-model="coach" />
+        <TextInput
+          label="Stadium"
+          placeholder="Stadium name"
+          v-model="stadium"
+        />
       </div>
     </template>
     <template #controls>
