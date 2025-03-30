@@ -235,23 +235,8 @@ function saveTeamDetails() {
           ></div>
         </div>
 
-        <!-- Match Editing Modal -->
-        <MatchResultModal
-          v-if="isEditingResult"
-          v-model:homeScore="editHomeScore"
-          v-model:awayScore="editAwayScore"
-          :editingMatch="editingMatch"
-          @cancel="cancelEditMatch"
-          @save="saveMatchResult"
-        />
-
         <!-- No Matches -->
-        <div
-          v-else-if="teamMatches.length === 0"
-          class="text-center py-8 text-gray-500 dark:text-gray-400"
-        >
-          No match history available
-        </div>
+        <NoMatches v-else-if="teamMatches.length === 0" />
 
         <!-- Matches List -->
         <div v-else>
@@ -261,18 +246,12 @@ function saveTeamDetails() {
               Recent Form
             </h4>
             <div class="flex space-x-3">
-              <span
+              <MatchResult
                 v-for="(result, index) in selectedTeam.recentForm"
                 :key="index"
-                class="w-10 h-10 flex items-center justify-center text-white text-sm font-bold rounded-full"
-                :class="{
-                  'bg-green-500': result === 'W',
-                  'bg-red-500': result === 'L',
-                  'bg-yellow-500': result === 'D',
-                }"
-              >
-                {{ result }}
-              </span>
+                :result="result"
+                :size="10"
+              />
             </div>
             <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
               Most recent match on the right
@@ -414,6 +393,16 @@ function saveTeamDetails() {
       </div>
     </div>
   </div>
+
+  <!-- Match Editing Modal -->
+  <MatchResultModal
+    v-if="isEditingResult"
+    v-model:homeScore="editHomeScore"
+    v-model:awayScore="editAwayScore"
+    :editingMatch="editingMatch"
+    @cancel="cancelEditMatch"
+    @save="saveMatchResult"
+  />
 
   <!-- Add this modal for editing team details -->
   <TeamDetailsModal
