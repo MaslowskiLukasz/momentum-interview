@@ -10,30 +10,22 @@ const gamesPlayed = computed(() => {
   <div class="mb-6 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
     <h4 class="text-lg font-medium mb-3 dark:text-white">Season Summary</h4>
     <div class="grid grid-cols-4 gap-4">
-      <div class="text-center">
-        <p class="text-sm text-gray-500 dark:text-gray-400">Played</p>
-        <p class="text-2xl font-bold dark:text-white">
-          {{ gamesPlayed }}
-        </p>
-      </div>
-      <div class="text-center">
-        <p class="text-sm text-gray-500 dark:text-gray-400">Won</p>
-        <p class="text-2xl font-bold text-green-600 dark:text-green-400">
-          {{ team.wins }}
-        </p>
-      </div>
-      <div class="text-center">
-        <p class="text-sm text-gray-500 dark:text-gray-400">Drawn</p>
-        <p class="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
-          {{ team.draws }}
-        </p>
-      </div>
-      <div class="text-center">
-        <p class="text-sm text-gray-500 dark:text-gray-400">Lost</p>
-        <p class="text-2xl font-bold text-red-600 dark:text-red-400">
-          {{ team.losses }}
-        </p>
-      </div>
+      <SummaryItem label="Played" :value="gamesPlayed" />
+      <SummaryItem
+        label="Won"
+        :value="team.wins"
+        color="text-green-600 dark:text-green-400"
+      />
+      <SummaryItem
+        label="Draw"
+        :value="team.draws"
+        color="text-yellow-600 dark:text-yellow-400"
+      />
+      <SummaryItem
+        label="Lost"
+        :value="team.losses"
+        color="text-red-600 dark:text-red-400"
+      />
     </div>
   </div>
 </template>
