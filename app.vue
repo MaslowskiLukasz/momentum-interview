@@ -1,7 +1,4 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
-import { useMatchesStore } from './stores/matches';
-
 const isLoading = ref(false);
 const isLoadingMatches = ref(false);
 const favoriteTeamId = ref(null);
@@ -112,7 +109,6 @@ function toggleFavoriteTeam(team) {
       <!-- Teams Table View (moved above favorite team section) -->
       <List
         v-if="!selectedTeam && !isLoading"
-        :teams="teams"
         :favoriteTeamId="favoriteTeamId"
         @selectTeam="selectTeam"
         @toggleFavoriteTeam="toggleFavoriteTeam"
