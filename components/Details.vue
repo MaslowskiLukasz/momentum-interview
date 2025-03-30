@@ -216,7 +216,7 @@ function saveTeamDetails() {
     </div>
 
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-      <TeamDetailsHeader />
+      <TeamDetailsHeader :team="selectedTeam" />
 
       <div class="p-6">
         <div
