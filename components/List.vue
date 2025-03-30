@@ -74,124 +74,56 @@ function toggleFavoriteTeam(team) {
     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
       <thead class="bg-gray-50 dark:bg-gray-700">
         <tr>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
-            @click="toggleSortDirection('position')"
-          >
-            <div class="flex items-center space-x-1">
-              <span>Pos</span>
-              <SortChevron
-                v-if="sortBy === 'position'"
-                :direction="sortDirection"
-              />
-            </div>
-          </th>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
-            @click="toggleSortDirection('name')"
-          >
-            <div class="flex items-center space-x-1">
-              <span>Team</span>
-              <SortChevron
-                v-if="sortBy === 'name'"
-                :direction="sortDirection"
-              />
-            </div>
-          </th>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
-            @click="toggleSortDirection('points')"
-          >
-            <div class="flex items-center space-x-1">
-              <span>Points</span>
-              <SortChevron
-                v-if="sortBy === 'points'"
-                :direction="sortDirection"
-              />
-            </div>
-          </th>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
-          >
-            <div class="flex items-center space-x-1">
-              <span>Played</span>
-            </div>
-          </th>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
-            @click="toggleSortDirection('wins')"
-          >
-            <div class="flex items-center space-x-1">
-              <span>W</span>
-              <SortChevron
-                v-if="sortBy === 'wins'"
-                :direction="sortDirection"
-              />
-            </div>
-          </th>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
-            @click="toggleSortDirection('draws')"
-          >
-            <div class="flex items-center space-x-1">
-              <span>D</span>
-              <SortChevron
-                v-if="sortBy === 'draws'"
-                :direction="sortDirection"
-              />
-            </div>
-          </th>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
-            @click="toggleSortDirection('losses')"
-          >
-            <div class="flex items-center space-x-1">
-              <span>L</span>
-              <SortChevron
-                v-if="sortBy === 'losses'"
-                :direction="sortDirection"
-              />
-            </div>
-          </th>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
-            @click="toggleSortDirection('goalsFor')"
-          >
-            <div class="flex items-center space-x-1">
-              <span>GF</span>
-              <SortChevron
-                v-if="sortBy === 'goalsFor'"
-                :direction="sortDirection"
-              />
-            </div>
-          </th>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
-            @click="toggleSortDirection('goalsAgainst')"
-          >
-            <div class="flex items-center space-x-1">
-              <span>GA</span>
-              <SortChevron
-                v-if="sortBy === 'goalsAgainst'"
-                :direction="sortDirection"
-              />
-            </div>
-          </th>
-          <th
-            scope="col"
-            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
-          >
-            Form
-          </th>
+          <TableHeader
+            text="Pos"
+            :isSorted="sortBy === 'position'"
+            :sortDirection="sortDirection"
+            @toggleSort="toggleSortDirection('position')"
+          />
+          <TableHeader
+            text="Team"
+            :isSorted="sortBy === 'name'"
+            :sortDirection="sortDirection"
+            @toggleSort="toggleSortDirection('name')"
+          />
+          <TableHeader
+            text="Points"
+            :isSorted="sortBy === 'points'"
+            :sortDirection="sortDirection"
+            @toggleSort="toggleSortDirection('points')"
+          />
+          <TableHeader text="Played" :isSorted="false" />
+          <TableHeader
+            text="W"
+            :isSorted="sortBy === 'wins'"
+            :sortDirection="sortDirection"
+            @toggleSort="toggleSortDirection('wins')"
+          />
+          <TableHeader
+            text="D"
+            :isSorted="sortBy === 'draws'"
+            :sortDirection="sortDirection"
+            @toggleSort="toggleSortDirection('draws')"
+          />
+          <TableHeader
+            text="L"
+            :isSorted="sortBy === 'losses'"
+            :sortDirection="sortDirection"
+            @toggleSort="toggleSortDirection('losses')"
+          />
+          <TableHeader
+            text="GF"
+            :isSorted="sortBy === 'goalsFor'"
+            :sortDirection="sortDirection"
+            @toggleSort="toggleSortDirection('goalsFor')"
+          />
+          <TableHeader
+            text="GA"
+            :isSorted="sortBy === 'goalsAgainst'"
+            :sortDirection="sortDirection"
+            @toggleSort="toggleSortDirection('goalsAgainst')"
+          />
+          <TableHeader text="Form" :isSorted="false" />
         </tr>
       </thead>
       <tbody
