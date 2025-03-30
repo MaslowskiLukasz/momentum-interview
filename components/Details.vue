@@ -244,41 +244,7 @@ function saveTeamDetails() {
           <RecentForm :matches="selectedTeam.recentForm" />
 
           <!-- Match Statistics Summary -->
-          <div class="mb-6 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-            <h4 class="text-lg font-medium mb-3 dark:text-white">
-              Season Summary
-            </h4>
-            <div class="grid grid-cols-4 gap-4">
-              <div class="text-center">
-                <p class="text-sm text-gray-500 dark:text-gray-400">Played</p>
-                <p class="text-2xl font-bold dark:text-white">
-                  {{ gamesPlayed(selectedTeam) }}
-                </p>
-              </div>
-              <div class="text-center">
-                <p class="text-sm text-gray-500 dark:text-gray-400">Won</p>
-                <p
-                  class="text-2xl font-bold text-green-600 dark:text-green-400"
-                >
-                  {{ selectedTeam.wins }}
-                </p>
-              </div>
-              <div class="text-center">
-                <p class="text-sm text-gray-500 dark:text-gray-400">Drawn</p>
-                <p
-                  class="text-2xl font-bold text-yellow-600 dark:text-yellow-400"
-                >
-                  {{ selectedTeam.draws }}
-                </p>
-              </div>
-              <div class="text-center">
-                <p class="text-sm text-gray-500 dark:text-gray-400">Lost</p>
-                <p class="text-2xl font-bold text-red-600 dark:text-red-400">
-                  {{ selectedTeam.losses }}
-                </p>
-              </div>
-            </div>
-          </div>
+          <SeasonSummary :team="selectedTeam" />
 
           <!-- All Matches Table -->
           <div class="overflow-x-auto">
