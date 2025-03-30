@@ -9,11 +9,7 @@ const emit = defineEmits(['editTeamInfo']);
       <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
         {{ team.name }}
       </h2>
-      <span
-        class="ml-3 px-3 py-1 text-sm font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
-      >
-        #{{ team.position }}
-      </span>
+      <Pill>#{{ team.position }}</Pill>
     </div>
 
     <div class="space-y-3">
