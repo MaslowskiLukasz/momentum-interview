@@ -136,7 +136,6 @@ function toggleSortDirection(field) {
               <div class="text-sm font-medium text-gray-900 dark:text-white">
                 {{ team.name }}
               </div>
-              <!-- Favorite Star -->
               <FavoriteStar
                 :isFavorite="favoriteTeamId === team.id"
                 @toggleFavorite="emit('toggleFavoriteTeam', team)"

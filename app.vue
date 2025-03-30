@@ -99,30 +99,21 @@ function toggleFavoriteTeam(team) {
 
 <template>
   <div class="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
-    <!-- Header -->
     <Header />
-
     <main class="container mx-auto grow px-4 py-8">
-      <!-- Loading State -->
       <Loader v-if="isLoading" />
-
-      <!-- Teams Table View (moved above favorite team section) -->
       <List
         v-if="!selectedTeam && !isLoading"
         :favoriteTeamId="favoriteTeamId"
         @selectTeam="selectTeam"
         @toggleFavoriteTeam="toggleFavoriteTeam"
       />
-
-      <!-- Favorite Team Section (only shown when a favorite team is selected) -->
       <FavoriteTeamSection
         v-if="favoriteTeam && !selectedTeam && !isLoading"
         :favoriteTeam="favoriteTeam"
         :favoriteTeamRecentMatches="favoriteTeamRecentMatches"
         @openDetails="selectTeam"
       />
-
-      <!-- Team Details -->
       <Details
         v-else-if="selectedTeam"
         :favoriteTeamId="favoriteTeamId"
@@ -131,8 +122,6 @@ function toggleFavoriteTeam(team) {
         @toggleFavoriteTeam="toggleFavoriteTeam"
       />
     </main>
-
-    <!-- Footer -->
     <Footer />
   </div>
 </template>
