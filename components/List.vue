@@ -57,14 +57,6 @@ function toggleSortDirection(field) {
     sortDirection.value = 'asc';
   }
 }
-
-function selectTeam(team) {
-  emit('selectTeam', team);
-}
-
-function toggleFavoriteTeam(team) {
-  emit('toggleFavoriteTeam', team);
-}
 </script>
 
 <template>
@@ -132,7 +124,7 @@ function toggleFavoriteTeam(team) {
         <tr
           v-for="team in filteredAndSortedTeams"
           :key="team.id"
-          @click="selectTeam(team)"
+          @click="emit('selectTeam', team)"
           class="hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors"
           :class="{
             'bg-blue-50 dark:bg-blue-900/20': favoriteTeamId === team.id,
@@ -147,7 +139,7 @@ function toggleFavoriteTeam(team) {
               <!-- Favorite Star -->
               <FavoriteStar
                 :isFavorite="favoriteTeamId === team.id"
-                @toggleFavorite="toggleFavoriteTeam(team)"
+                @toggleFavorite="emit('toggleFavoriteTeam', team)"
               />
             </div>
           </TableCell>
