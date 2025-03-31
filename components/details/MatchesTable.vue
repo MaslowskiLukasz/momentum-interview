@@ -1,6 +1,6 @@
 <script setup>
 const { matches } = defineProps(['matches']);
-const emit = defineEmits('editMatch');
+const emit = defineEmits(['editMatch']);
 </script>
 
 <template>
