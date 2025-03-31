@@ -50,14 +50,7 @@ const {
       <div class="p-6 border-t border-gray-200 dark:border-gray-700">
         <h3 class="text-xl font-semibold mb-4 dark:text-white">All Matches</h3>
         <SuccessBanner v-if="showEditSuccess" />
-        <div
-          v-if="isLoadingMatches"
-          class="flex justify-center items-center py-8"
-        >
-          <div
-            class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"
-          ></div>
-        </div>
+        <Loader v-if="isLoadingMatches" />
         <NoMatches v-else-if="teamMatches.length === 0" />
         <div v-else>
           <RecentForm :matches="selectedTeam.recentForm" />
