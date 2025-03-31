@@ -1,4 +1,8 @@
 <script setup>
+definePageMeta({
+  middleware: ['details-middleware'],
+});
+
 const leagueStore = useLeagueStore();
 const { isLoadingMatches } = storeToRefs(leagueStore);
 const { resetSelectedTeam } = leagueStore;
