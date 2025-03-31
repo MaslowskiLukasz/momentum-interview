@@ -4,7 +4,8 @@ definePageMeta({
 });
 
 const leagueStore = useLeagueStore();
-const { isLoadingMatches } = storeToRefs(leagueStore);
+const { isLoadingMatches, teamMatches, selectedTeam } =
+  storeToRefs(leagueStore);
 const { resetSelectedTeam } = leagueStore;
 
 const favoriteTeamStore = useFavoriteTeamStore();
@@ -21,6 +22,8 @@ async function goToList() {
   <Details
     :favoriteTeamId="favoriteTeamId"
     :isLoadingMatches="isLoadingMatches"
+    :teamMatches="teamMatches"
+    :selectedTeam="selectedTeam"
     @goBack="goToList"
     @toggleFavoriteTeam="toggleFavoriteTeam"
   />

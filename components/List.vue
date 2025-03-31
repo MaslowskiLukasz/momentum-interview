@@ -1,16 +1,13 @@
 <script setup>
-const { favoriteTeamId } = defineProps(['favoriteTeamId']);
+const { favoriteTeamId, teams } = defineProps(['favoriteTeamId', 'teams']);
 const emit = defineEmits(['selectTeam', 'toggleFavoriteTeam']);
-
-const store = useLeagueStore();
-const { teams } = storeToRefs(store);
 
 const sortBy = ref('position'); // Default sort field
 const sortDirection = ref('asc'); // Default sort direction
 
 const filteredAndSortedTeams = computed(() => {
   // First filter the teams
-  let filtered = teams.value;
+  let filtered = teams;
 
   // Then sort the filtered results
   return [...filtered].sort((a, b) => {

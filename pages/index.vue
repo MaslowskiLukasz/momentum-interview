@@ -1,5 +1,6 @@
 <script setup>
 const leagueStore = useLeagueStore();
+const { teams } = storeToRefs(leagueStore);
 const { selectTeam } = leagueStore;
 
 const favoriteTeamStore = useFavoriteTeamStore();
@@ -16,6 +17,7 @@ async function goToDetails(team) {
 <template>
   <div>
     <List
+      :teams="teams"
       :favoriteTeamId="favoriteTeamId"
       @selectTeam="goToDetails"
       @toggleFavoriteTeam="toggleFavoriteTeam"
