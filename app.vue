@@ -73,8 +73,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
-    <Header />
+  <NuxtLayout>
     <main class="container mx-auto grow px-4 py-8">
       <Loader v-if="isLoading" />
       <List
@@ -97,8 +96,7 @@ onMounted(() => {
         @toggleFavoriteTeam="toggleFavoriteTeam"
       />
     </main>
-    <Footer />
-  </div>
+  </NuxtLayout>
 </template>
 
 <style>
