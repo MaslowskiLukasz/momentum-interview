@@ -30,7 +30,7 @@ const {
   startEditingMatch,
   cancelEditMatch,
   saveMatchResult,
-} = useEditResultModal();
+} = useEditResult();
 </script>
 
 <template>

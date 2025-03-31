@@ -1,4 +1,4 @@
-export const useEditResultModal = () => {
+export const useEditResult = () => {
   const editHomeScore = ref(0);
   const editAwayScore = ref(0);
   const editingMatch = ref(null);
