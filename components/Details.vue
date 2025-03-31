@@ -33,7 +33,11 @@ const {
 <template>
   <div class="team-details py-6">
     <div class="flex justify-between items-center mb-6">
-      <BackButton label="Back to Teams" @goBack="emit('goBack')" />
+      <Button label="Back to Teams" type="ghost" @click="emit('goBack')">
+        <template #left>
+          <ArrowLeft />
+        </template>
+      </Button>
       <FavoriteButton
         :isFavorite="favoriteTeamId === selectedTeam.id"
         @toggleFavorite="emit('toggleFavoriteTeam', selectedTeam)"
