@@ -2,7 +2,7 @@
 const { favoriteTeamId } = defineProps(['favoriteTeamId']);
 const emit = defineEmits(['selectTeam', 'toggleFavoriteTeam']);
 
-const store = useTeamsStore();
+const store = useLeagueStore();
 const { teams } = storeToRefs(store);
 
 const sortBy = ref('position'); // Default sort field

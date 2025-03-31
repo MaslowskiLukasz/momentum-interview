@@ -1,11 +1,10 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 
-export const useMatchesStore = defineStore('matches', () => {
+export const useLeagueStore = defineStore('matches', () => {
   const allMatches = ref([]);
-  const store = useTeamsStore();
-  const { teams } = storeToRefs(store);
-
   const teamMatches = ref([]);
+  const teams = ref([]);
+  const selectedTeam = ref(null);
 
   function getTeamMatches(teamId, limit = null) {
     if (!teamId || !allMatches.value.length) return [];
@@ -21,7 +20,9 @@ export const useMatchesStore = defineStore('matches', () => {
     );
 
     // Apply limit if provided
-    const limitedMatches = limit ? sortedMatches.slice(0, limit) : sortedMatches;
+    const limitedMatches = limit
+      ? sortedMatches.slice(0, limit)
+      : sortedMatches;
 
     // Format matches for display
     return limitedMatches.map((match) => {
@@ -60,5 +61,5 @@ export const useMatchesStore = defineStore('matches', () => {
     });
   }
 
-  return { allMatches, getTeamMatches, teamMatches }
+  return { allMatches, teamMatches, teams, selectedTeam, getTeamMatches };
 });

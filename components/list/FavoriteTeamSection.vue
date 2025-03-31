@@ -114,7 +114,7 @@ function selectTeam(team) {
                       <span class="text-gray-900 dark:text-white font-medium">
                         {{ match.homeScore }} - {{ match.awayScore }}
                       </span>
-                      <MatchResult :result="match.result" />
+                      <MatchResult :result="match.result" :size="10" />
                     </div>
                   </td>
                 </tr>

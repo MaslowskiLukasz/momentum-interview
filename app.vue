@@ -1,26 +1,18 @@
 <script setup>
 const isLoading = ref(false);
 const isLoadingMatches = ref(false);
-const favoriteTeamId = ref(null);
 
-const teamsStore = useTeamsStore();
-const { teams, selectedTeam } = storeToRefs(teamsStore);
+const store = useLeagueStore();
+const { allMatches, teamMatches, teams, selectedTeam } = storeToRefs(store);
+const { getTeamMatches } = store;
 
-const matchesStore = useMatchesStore();
-const { allMatches, teamMatches } = storeToRefs(matchesStore);
-const { getTeamMatches } = matchesStore;
-
-// Add a new computed property for favorite team data
-const favoriteTeam = computed(() => {
-  if (!favoriteTeamId.value || !teams.value.length) return null;
-  return teams.value.find((team) => team.id === favoriteTeamId.value);
-});
-
-// Update the computed property to use the new function
-const favoriteTeamRecentMatches = computed(() => {
-  if (!favoriteTeam.value) return [];
-  return getTeamMatches(favoriteTeam.value.id, 5);
-});
+const {
+  favoriteTeamId,
+  favoriteTeam,
+  favoriteTeamRecentMatches,
+  loadFavoriteTeam,
+  toggleFavoriteTeam,
+} = useFavoriteTeam();
 
 // Update the selectTeam function to use the new function
 const selectTeam = async (team) => {
@@ -76,25 +68,8 @@ const fetchTeams = async () => {
 
 onMounted(() => {
   fetchTeams();
-
-  // Load favorite team from local storage
-  const savedFavoriteTeamId = localStorage.getItem('favoriteTeamId');
-  if (savedFavoriteTeamId) {
-    favoriteTeamId.value = parseInt(savedFavoriteTeamId);
-  }
+  loadFavoriteTeam();
 });
-
-function toggleFavoriteTeam(team) {
-  if (favoriteTeamId.value === team.id) {
-    // If clicking the current favorite, remove it
-    favoriteTeamId.value = null;
-    localStorage.removeItem('favoriteTeamId');
-  } else {
-    // Set as new favorite
-    favoriteTeamId.value = team.id;
-    localStorage.setItem('favoriteTeamId', team.id);
-  }
-}
 </script>
 
 <template>
