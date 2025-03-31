@@ -2,12 +2,9 @@
 const isLoading = ref(false);
 const isLoadingMatches = ref(false);
 
-const teamsStore = useTeamsStore();
-const { teams, selectedTeam } = storeToRefs(teamsStore);
-
-const matchesStore = useMatchesStore();
-const { allMatches, teamMatches } = storeToRefs(matchesStore);
-const { getTeamMatches } = matchesStore;
+const store = useLeagueStore();
+const { allMatches, teamMatches, teams, selectedTeam } = storeToRefs(store);
+const { getTeamMatches } = store;
 
 const {
   favoriteTeamId,

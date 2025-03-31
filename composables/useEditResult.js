@@ -5,10 +5,8 @@ export const useEditResult = () => {
   const isEditingResult = ref(false);
   const showEditSuccess = ref(false);
 
-  const matchesStore = useMatchesStore();
-  const teamsStore = useTeamsStore();
-  const { allMatches, teamMatches } = storeToRefs(matchesStore);
-  const { teams, selectedTeam } = storeToRefs(teamsStore);
+  const store = useLeagueStore();
+  const { allMatches, teamMatches, teams, selectedTeam } = storeToRefs(store);
 
   const startEditingMatch = (match) => {
     editingMatch.value = { ...match };

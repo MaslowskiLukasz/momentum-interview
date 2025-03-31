@@ -1,10 +1,9 @@
 export const useFavoriteTeam = () => {
   const favoriteTeamId = ref(null);
 
-  const teamsStore = useTeamsStore();
-  const matchesStore = useMatchesStore();
-  const { teams } = storeToRefs(teamsStore);
-  const { getTeamMatches } = matchesStore;
+  const store = useLeagueStore();
+  const { teams } = storeToRefs(store);
+  const { getTeamMatches } = store;
 
   const loadFavoriteTeam = () => {
     const savedFavoriteTeamId = localStorage.getItem('favoriteTeamId');

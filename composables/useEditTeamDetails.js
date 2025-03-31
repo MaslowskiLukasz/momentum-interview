@@ -3,8 +3,8 @@ export const useEditTeamDetails = () => {
   const editCoach = ref('');
   const editStadium = ref('');
 
-  const teamsStore = useTeamsStore();
-  const { selectedTeam, teams } = storeToRefs(teamsStore);
+  const store = useLeagueStore();
+  const { selectedTeam, teams } = storeToRefs(store);
 
   const startEditingTeamDetails = () => {
     if (!selectedTeam.value) return;
