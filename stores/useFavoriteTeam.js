@@ -1,4 +1,4 @@
-export const useFavoriteTeam = () => {
+export const useFavoriteTeamStore = defineStore('favoriteTeam', () => {
   const favoriteTeamId = ref(null);
 
   const store = useLeagueStore();
@@ -39,4 +39,4 @@ export const useFavoriteTeam = () => {
     loadFavoriteTeam,
     toggleFavoriteTeam,
   };
-};
+});

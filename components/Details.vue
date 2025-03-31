@@ -1,13 +1,13 @@
 <script setup>
-const { favoriteTeamId, isLoadingMatches } = defineProps([
-  'favoriteTeamId',
-  'isLoadingMatches',
-]);
+const { favoriteTeamId, isLoadingMatches, teamMatches, selectedTeam } =
+  defineProps([
+    'favoriteTeamId',
+    'isLoadingMatches',
+    'teamMatches',
+    'selectedTeam',
+  ]);
 
 const emit = defineEmits(['goBack', 'toggleFavoriteTeam']);
-
-const store = useLeagueStore();
-const { teamMatches, selectedTeam } = storeToRefs(store);
 
 const {
   isEditingTeamDetails,

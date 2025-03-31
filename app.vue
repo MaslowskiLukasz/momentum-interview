@@ -1,34 +1,11 @@
 <script setup>
 const isLoading = ref(false);
-const isLoadingMatches = ref(false);
 
 const store = useLeagueStore();
-const { allMatches, teamMatches, teams, selectedTeam } = storeToRefs(store);
-const { getTeamMatches } = store;
+const { allMatches, teams } = storeToRefs(store);
 
-const {
-  favoriteTeamId,
-  favoriteTeam,
-  favoriteTeamRecentMatches,
-  loadFavoriteTeam,
-  toggleFavoriteTeam,
-} = useFavoriteTeam();
-
-// Update the selectTeam function to use the new function
-const selectTeam = async (team) => {
-  selectedTeam.value = team;
-  isLoadingMatches.value = true;
-
-  try {
-    // Get all matches for the team
-    teamMatches.value = getTeamMatches(team.id);
-  } catch (error) {
-    console.error('Error fetching team matches:', error);
-    teamMatches.value = [];
-  } finally {
-    isLoadingMatches.value = false;
-  }
-};
+const favoriteTeamStore = useFavoriteTeamStore();
+const { loadFavoriteTeam } = favoriteTeamStore;
 
 const fetchTeams = async () => {
   isLoading.value = true;
@@ -76,25 +53,7 @@ onMounted(() => {
   <NuxtLayout>
     <main class="container mx-auto grow px-4 py-8">
       <Loader v-if="isLoading" />
-      <List
-        v-if="!selectedTeam && !isLoading"
-        :favoriteTeamId="favoriteTeamId"
-        @selectTeam="selectTeam"
-        @toggleFavoriteTeam="toggleFavoriteTeam"
-      />
-      <FavoriteTeamSection
-        v-if="favoriteTeam && !selectedTeam && !isLoading"
-        :favoriteTeam="favoriteTeam"
-        :favoriteTeamRecentMatches="favoriteTeamRecentMatches"
-        @openDetails="selectTeam"
-      />
-      <Details
-        v-else-if="selectedTeam"
-        :favoriteTeamId="favoriteTeamId"
-        :isLoadingMatches="isLoadingMatches"
-        @goBack="selectedTeam = null"
-        @toggleFavoriteTeam="toggleFavoriteTeam"
-      />
+      <NuxtPage v-else />
     </main>
   </NuxtLayout>
 </template>
