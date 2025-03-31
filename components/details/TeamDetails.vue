@@ -13,30 +13,23 @@ const emit = defineEmits(['editTeamInfo']);
     </div>
 
     <div class="space-y-3">
-      <div class="flex items-center space-x-2">
-        <Calendar />
-        <p class="dark:text-gray-300">
-          <strong>Founded:</strong> {{ team.founded }}
-        </p>
-      </div>
-      <div class="flex items-center space-x-2">
-        <Building />
-        <p class="dark:text-gray-300">
-          <strong>Stadium:</strong> {{ team.stadium }}
+      <InfoItem label="Founded" :value="team.founded">
+        <template #left><Calendar /></template>
+      </InfoItem>
+      <InfoItem label="Stadium" :value="team.stadium">
+        <template #left><Building /></template>
+        <template #right>
           <button
             @click="emit('editTeamInfo')"
             class="ml-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm"
           >
             Edit
           </button>
-        </p>
-      </div>
-      <div class="flex items-center space-x-2">
-        <User />
-        <p class="dark:text-gray-300">
-          <strong>Coach:</strong> {{ team.coach }}
-        </p>
-      </div>
+        </template>
+      </InfoItem>
+      <InfoItem label="Coach" :value="team.coach">
+        <template #left><User /></template>
+      </InfoItem>
     </div>
   </div>
 </template>

@@ -5,10 +5,7 @@ const model = defineModel();
 
 <template>
   <div>
-    <label
-      class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-      >{{ label }}</label
-    >
+    <InputLabel :value="label" />
     <input
       v-model="model"
       type="text"

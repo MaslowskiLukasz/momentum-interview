@@ -39,18 +39,8 @@ const emit = defineEmits(['cancel', 'save']);
       </div>
     </template>
     <template #controls>
-      <button
-        @click="emit('cancel')"
-        class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none"
-      >
-        Cancel
-      </button>
-      <button
-        @click="emit('save')"
-        class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
-      >
-        Save Result
-      </button>
+      <Button label="Cancel" type="secondary" @click="emit('cancel')" />
+      <Button label="Save Result" type="primary" @click="emit('save')" />
     </template>
   </Modal>
 </template>

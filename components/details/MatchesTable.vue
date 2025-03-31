@@ -53,12 +53,11 @@ const emit = defineEmits(['editMatch']);
             </div>
           </td>
           <td class="px-4 py-3 whitespace-nowrap">
-            <button
+            <Button
+              label="Edit Result"
+              type="ghost"
               @click="emit('editMatch', match)"
-              class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
-            >
-              Edit Result
-            </button>
+            />
           </td>
         </tr>
       </tbody>
