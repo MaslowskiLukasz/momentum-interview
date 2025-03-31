@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia';
 
-export const useLeagueStore = defineStore('matches', () => {
+export const useLeagueStore = defineStore('league', () => {
   const allMatches = ref([]);
   const teamMatches = ref([]);
   const teams = ref([]);
   const selectedTeam = ref(null);
+  const isLoadingMatches = ref(false);
 
   function getTeamMatches(teamId, limit = null) {
     if (!teamId || !allMatches.value.length) return [];
@@ -61,5 +62,33 @@ export const useLeagueStore = defineStore('matches', () => {
     });
   }
 
-  return { allMatches, teamMatches, teams, selectedTeam, getTeamMatches };
+  const selectTeam = async (team) => {
+    selectedTeam.value = team;
+    isLoadingMatches.value = true;
+
+    try {
+      // Get all matches for the team
+      teamMatches.value = getTeamMatches(team.id);
+    } catch (error) {
+      console.error('Error fetching team matches:', error);
+      teamMatches.value = [];
+    } finally {
+      isLoadingMatches.value = false;
+    }
+  };
+
+  const resetSelectedTeam = () => {
+    selectTeam.value = null;
+  };
+
+  return {
+    allMatches,
+    teamMatches,
+    teams,
+    selectedTeam,
+    isLoadingMatches,
+    getTeamMatches,
+    selectTeam,
+    resetSelectedTeam,
+  };
 });
