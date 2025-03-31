@@ -10,19 +10,16 @@ const matchesStore = useMatchesStore();
 const teamsStore = useTeamsStore();
 
 const { teamMatches } = storeToRefs(matchesStore);
-const { teams, selectedTeam } = storeToRefs(teamsStore);
+const { selectedTeam } = storeToRefs(teamsStore);
 
-const isEditingTeamDetails = ref(false);
-const editCoach = ref('');
-const editStadium = ref('');
-
-function startEditingTeamDetails() {
-  if (!selectedTeam.value) return;
-
-  editCoach.value = selectedTeam.value.coach;
-  editStadium.value = selectedTeam.value.stadium;
-  isEditingTeamDetails.value = true;
-}
+const {
+  isEditingTeamDetails,
+  editCoach,
+  editStadium,
+  startEditingTeamDetails,
+  cancelEditTeamDetails,
+  saveTeamDetails,
+} = useEditTeamDetails();
 
 const {
   isEditingResult,
@@ -34,39 +31,6 @@ const {
   cancelEditMatch,
   saveMatchResult,
 } = useEditResultModal();
-
-function cancelEditTeamDetails() {
-  editCoach.value = '';
-  editStadium.value = '';
-  isEditingTeamDetails.value = false;
-}
-
-function saveTeamDetails() {
-  if (!selectedTeam.value) return;
-
-  // Find the team in the teams array
-  const teamIndex = teams.value.findIndex(
-    (t) => t.id === selectedTeam.value.id
-  );
-  if (teamIndex === -1) return;
-
-  // Update the team's coach and stadium
-  teams.value[teamIndex].coach = editCoach.value;
-  teams.value[teamIndex].stadium = editStadium.value;
-
-  // Update the selected team
-  selectedTeam.value.coach = editCoach.value;
-  selectedTeam.value.stadium = editStadium.value;
-
-  // Show success message
-  showEditSuccess.value = true;
-  setTimeout(() => {
-    showEditSuccess.value = false;
-  }, 3000);
-
-  // Close the modal
-  isEditingTeamDetails.value = false;
-}
 </script>
 
 <template>
