@@ -42,7 +42,7 @@ function selectTeam(team) {
                 v-for="(match, index) in favoriteTeamRecentMatches"
                 :key="index"
                 :result="match.result"
-                :size="10"
+                size="big"
               />
             </div>
             <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
@@ -114,7 +114,7 @@ function selectTeam(team) {
                       <span class="text-gray-900 dark:text-white font-medium">
                         {{ match.homeScore }} - {{ match.awayScore }}
                       </span>
-                      <MatchResult :result="match.result" :size="10" />
+                      <MatchResult :result="match.result" />
                     </div>
                   </td>
                 </tr>
