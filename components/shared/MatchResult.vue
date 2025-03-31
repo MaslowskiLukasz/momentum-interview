@@ -1,5 +1,5 @@
 <script setup>
-const { result, size = 6 } = defineProps(['result', 'size']);
+const { result, size = 'small' } = defineProps(['result', 'size']);
 
 const color = computed(() => {
   switch (result) {
@@ -11,12 +11,14 @@ const color = computed(() => {
       return 'bg-yellow-500';
   }
 });
+
+const circleSize = computed(() => (size === 'big' ? 'w-10 h-10' : 'w-6 h-6'));
 </script>
 
 <template>
   <span
     class="flex items-center justify-center text-white text-xs font-bold rounded-full"
-    :class="[color, `w-${size} h-${size}`]"
+    :class="[color, circleSize]"
   >
     {{ result }}
   </span>

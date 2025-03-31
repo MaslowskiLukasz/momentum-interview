@@ -10,7 +10,7 @@ const { matches } = defineProps(['matches']);
         v-for="(result, index) in matches"
         :key="index"
         :result="result"
-        :size="10"
+        size="big"
       />
     </div>
     <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
