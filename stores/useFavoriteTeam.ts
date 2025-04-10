@@ -1,5 +1,5 @@
 export const useFavoriteTeamStore = defineStore('favoriteTeam', () => {
-  const favoriteTeamId = ref(null);
+  const favoriteTeamId = ref<number | null>(null);
 
   const store = useLeagueStore();
   const { teams } = storeToRefs(store);
@@ -12,13 +12,13 @@ export const useFavoriteTeamStore = defineStore('favoriteTeam', () => {
     }
   };
 
-  const toggleFavoriteTeam = (team) => {
+  const toggleFavoriteTeam = (team: Team) => {
     if (favoriteTeamId.value === team.id) {
       favoriteTeamId.value = null;
       localStorage.removeItem('favoriteTeamId');
     } else {
       favoriteTeamId.value = team.id;
-      localStorage.setItem('favoriteTeamId', team.id);
+      localStorage.setItem('favoriteTeamId', team.id.toString());
     }
   };
 
