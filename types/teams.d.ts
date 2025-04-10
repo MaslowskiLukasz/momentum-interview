@@ -33,3 +33,14 @@ interface TeamMatch {
   result: Result;
   isHome: boolean;
 }
+
+interface TeamWithStats extends Team {
+  points: number;
+  wins: number;
+  draws: number;
+  losses: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  recentForm: Result[];
+  position: number;
+}
