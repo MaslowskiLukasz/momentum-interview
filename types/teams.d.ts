@@ -15,3 +15,16 @@ interface Match {
   homeScore: number;
   awayScore: number;
 }
+
+type Result = 'W' | 'L' | 'D';
+
+interface TeamMatch {
+  id: number;
+  date: string;
+  homeTeam: string;
+  awayTeam: string;
+  homeScore: number;
+  awayScore: number;
+  result: Result;
+  isHome: boolean;
+}
