@@ -3,8 +3,8 @@ import { defineStore } from 'pinia';
 export const useLeagueStore = defineStore('league', () => {
   const allMatches = ref<Match[]>([]);
   const teamMatches = ref<TeamMatch[]>([]);
-  const teams = ref<Team[]>([]);
-  const selectedTeam = ref<Team | null>(null);
+  const teams = ref<TeamWithStats[]>([]);
+  const selectedTeam = ref<TeamWithStats | null>(null);
   const isLoadingMatches = ref(false);
 
   function getTeamMatches(
@@ -65,7 +65,7 @@ export const useLeagueStore = defineStore('league', () => {
     });
   }
 
-  const selectTeam = async (team: Team) => {
+  const selectTeam = async (team: TeamWithStats) => {
     selectedTeam.value = team;
     isLoadingMatches.value = true;
 

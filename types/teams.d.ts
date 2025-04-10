@@ -16,6 +16,11 @@ interface Match {
   awayScore: number;
 }
 
+interface APIResponse {
+  teams: Team[];
+  matches: Match[];
+}
+
 type Result = 'W' | 'L' | 'D';
 
 interface TeamMatch {
@@ -27,4 +32,15 @@ interface TeamMatch {
   awayScore: number;
   result: Result;
   isHome: boolean;
+}
+
+interface TeamWithStats extends Team {
+  points: number;
+  wins: number;
+  draws: number;
+  losses: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  recentForm: Result[];
+  position: number;
 }

@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 const leagueStore = useLeagueStore();
 const { teams } = storeToRefs(leagueStore);
 const { selectTeam } = leagueStore;
@@ -8,7 +8,7 @@ const { favoriteTeamId, favoriteTeam, favoriteTeamRecentMatches } =
   storeToRefs(favoriteTeamStore);
 const { toggleFavoriteTeam } = favoriteTeamStore;
 
-async function goToDetails(team) {
+async function goToDetails(team: TeamWithStats) {
   selectTeam(team);
   await navigateTo('/details');
 }
