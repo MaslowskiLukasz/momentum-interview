@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 const isLoading = ref(false);
 
 const store = useLeagueStore();
@@ -14,13 +14,13 @@ const fetchTeams = async () => {
     // Add artificial delay to show loading state
     await new Promise((resolve) => setTimeout(resolve, 800));
 
-    const { data } = await useFetch('/data/teams.json');
+    const { data } = await useFetch<APIResponse>('/data/teams.json');
 
     // Store all matches
-    allMatches.value = data.value.matches || [];
+    allMatches.value = data.value?.matches || [];
 
     // Get teams data
-    const teamsData = data.value.teams || [];
+    const teamsData = data.value?.teams || [];
 
     // Calculate points and positions based on matches
     const teamsWithStats = calculateTeamStats(teamsData, allMatches.value);
