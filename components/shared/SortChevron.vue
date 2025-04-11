@@ -1,5 +1,8 @@
-<script setup>
-const { direction } = defineProps(['direction']);
+<script lang="ts" setup>
+interface Props {
+  direction: SortDirection;
+}
+const { direction } = defineProps<Props>();
 </script>
 
 <template>
