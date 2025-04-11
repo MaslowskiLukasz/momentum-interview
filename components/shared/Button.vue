@@ -24,7 +24,7 @@ const style = computed(() => {
 </script>
 
 <template>
-  <button @click="emit('click')" class="flex items-center" :class="style">
+  <button class="flex items-center" :class="style" @click="emit('click')">
     <slot name="left" />
     {{ label }}
   </button>
