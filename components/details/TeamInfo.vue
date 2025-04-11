@@ -8,7 +8,7 @@ const emit = defineEmits(['editTeamInfo']);
     <div
       class="flex flex-col md:flex-row md:justify-between md:items-start gap-6"
     >
-      <TeamDetails :team="team" @editTeamInfo="emit('editTeamInfo')" />
+      <TeamDetails :team="team" @edit-team-info="emit('editTeamInfo')" />
       <TeamStats :team="team" />
     </div>
   </div>
