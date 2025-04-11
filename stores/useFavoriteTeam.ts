@@ -22,7 +22,7 @@ export const useFavoriteTeamStore = defineStore('favoriteTeam', () => {
     }
   };
 
-  const favoriteTeam = computed(() => {
+  const favoriteTeam = computed<TeamWithStats | undefined | null>(() => {
     if (!favoriteTeamId.value || !teams.value.length) return null;
     return teams.value.find((team) => team.id === favoriteTeamId.value);
   });
