@@ -1,11 +1,19 @@
-<script setup>
-const { favoriteTeamId, teams } = defineProps(['favoriteTeamId', 'teams']);
-const emit = defineEmits(['selectTeam', 'toggleFavoriteTeam']);
+<script lang="ts" setup>
+interface Props {
+  favoriteTeamId: number | null;
+  teams: TeamWithStats[];
+}
 
-const sortBy = ref('position'); // Default sort field
-const sortDirection = ref('asc'); // Default sort direction
+const { favoriteTeamId, teams } = defineProps<Props>();
+const emit = defineEmits<{
+  selectTeam: [team: TeamWithStats];
+  toggleFavoriteTeam: [team: TeamWithStats];
+}>();
 
-const filteredAndSortedTeams = computed(() => {
+const sortBy = ref<SortField>('position'); // Default sort field
+const sortDirection = ref<SortDirection>('asc'); // Default sort direction
+
+const filteredAndSortedTeams = computed<TeamWithStats[]>(() => {
   // First filter the teams
   let filtered = teams;
 
@@ -39,12 +47,12 @@ const filteredAndSortedTeams = computed(() => {
 
 // Computed property to calculate games played for each team
 const gamesPlayed = computed(() => {
-  return (team) => {
+  return (team: TeamWithStats) => {
     return team.wins + team.draws + team.losses;
   };
 });
 
-function toggleSortDirection(field) {
+function toggleSortDirection(field: SortField) {
   if (sortBy.value === field) {
     // Toggle direction if clicking the same field
     sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc';

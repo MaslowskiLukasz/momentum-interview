@@ -12,7 +12,7 @@ export const useFavoriteTeamStore = defineStore('favoriteTeam', () => {
     }
   };
 
-  const toggleFavoriteTeam = (team: Team) => {
+  const toggleFavoriteTeam = (team: TeamWithStats) => {
     if (favoriteTeamId.value === team.id) {
       favoriteTeamId.value = null;
       localStorage.removeItem('favoriteTeamId');
