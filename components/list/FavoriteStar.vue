@@ -1,6 +1,11 @@
-<script setup>
-const { isFavorite } = defineProps(['isFavorite']);
-const emit = defineEmits(['toggleFavorite']);
+<script lang="ts" setup>
+interface Props {
+  isFavorite: boolean;
+}
+const { isFavorite } = defineProps<Props>();
+const emit = defineEmits<{
+  toggleFavorite: [];
+}>();
 </script>
 
 <template>

@@ -1,5 +1,8 @@
-<script setup>
-const { text } = defineProps(['text']);
+<script lang="ts" setup>
+interface Props {
+  text?: string | number;
+}
+const { text } = defineProps<Props>();
 </script>
 
 <template>
