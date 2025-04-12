@@ -1,5 +1,8 @@
-<script setup>
-const { team } = defineProps(['team']);
+<script lang="ts" setup>
+interface Props {
+  team: TeamWithStats;
+}
+const { team } = defineProps<Props>();
 </script>
 
 <template>

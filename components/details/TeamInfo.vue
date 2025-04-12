@@ -1,6 +1,10 @@
-<script setup>
-const { team } = defineProps(['team']);
-const emit = defineEmits(['editTeamInfo']);
+<script lang="ts" setup>
+interface Props {
+  team: TeamWithStats;
+}
+
+const { team } = defineProps<Props>();
+const emit = defineEmits<{ editTeamInfo: [] }>();
 </script>
 
 <template>
