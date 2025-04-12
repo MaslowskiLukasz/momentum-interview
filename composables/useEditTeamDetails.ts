@@ -1,4 +1,13 @@
-export const useEditTeamDetails = () => {
+interface UseEditTeamDetailsReturn {
+  isEditingTeamDetails: Ref<boolean>;
+  editCoach: Ref<string>;
+  editStadium: Ref<string>;
+  startEditingTeamDetails: () => void;
+  cancelEditTeamDetails: () => void;
+  saveTeamDetails: () => void;
+}
+
+export const useEditTeamDetails = (): UseEditTeamDetailsReturn => {
   const isEditingTeamDetails = ref(false);
   const editCoach = ref('');
   const editStadium = ref('');
@@ -6,7 +15,7 @@ export const useEditTeamDetails = () => {
   const store = useLeagueStore();
   const { selectedTeam, teams } = storeToRefs(store);
 
-  const startEditingTeamDetails = () => {
+  const startEditingTeamDetails = (): void => {
     if (!selectedTeam.value) return;
 
     editCoach.value = selectedTeam.value.coach;
@@ -14,18 +23,18 @@ export const useEditTeamDetails = () => {
     isEditingTeamDetails.value = true;
   };
 
-  const cancelEditTeamDetails = () => {
+  const cancelEditTeamDetails = (): void => {
     editCoach.value = '';
     editStadium.value = '';
     isEditingTeamDetails.value = false;
   };
 
-  const saveTeamDetails = () => {
+  const saveTeamDetails = (): void => {
     if (!selectedTeam.value) return;
 
     // Find the team in the teams array
     const teamIndex = teams.value.findIndex(
-      (t) => t.id === selectedTeam.value.id
+      (t) => t.id === selectedTeam.value?.id
     );
     if (teamIndex === -1) return;
 
