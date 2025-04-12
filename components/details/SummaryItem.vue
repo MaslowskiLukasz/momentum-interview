@@ -1,9 +1,11 @@
-<script setup>
-const {
-  label,
-  value,
-  color = 'dark:text-white',
-} = defineProps(['label', 'value', 'color']);
+<script lang="ts" setup>
+interface Props {
+  label: string;
+  value: string | number;
+  color?: string;
+}
+
+const { label, value, color = 'dark:text-white' } = defineProps<Props>();
 </script>
 
 <template>
