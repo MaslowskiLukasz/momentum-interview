@@ -1,5 +1,12 @@
-<script setup>
-const { result, size = 'small' } = defineProps(['result', 'size']);
+<script lang="ts" setup>
+type Size = 'small' | 'big';
+
+interface Props {
+  result: Result;
+  size?: Size;
+}
+
+const { result, size = 'small' } = defineProps<Props>();
 
 const color = computed(() => {
   switch (result) {

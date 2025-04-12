@@ -1,14 +1,12 @@
-<script setup>
-const { favoriteTeam, favoriteTeamRecentMatches } = defineProps([
-  'favoriteTeam',
-  'favoriteTeamRecentMatches',
-]);
-
-const emit = defineEmits(['openDetails']);
-
-function selectTeam(team) {
-  emit('openDetails', team);
+<script lang="ts" setup>
+interface Props {
+  favoriteTeam: TeamWithStats;
+  favoriteTeamRecentMatches: TeamMatch[];
 }
+const { favoriteTeam, favoriteTeamRecentMatches } = defineProps<Props>();
+const emit = defineEmits<{
+  openDetails: [team: TeamWithStats];
+}>();
 </script>
 
 <template>
@@ -22,8 +20,8 @@ function selectTeam(team) {
             <span class="mr-2">⭐</span> {{ favoriteTeam.name }} - Recent Form
           </h2>
           <button
-            @click="selectTeam(favoriteTeam)"
             class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium"
+            @click="emit('openDetails', favoriteTeam)"
           >
             View Full Details
           </button>

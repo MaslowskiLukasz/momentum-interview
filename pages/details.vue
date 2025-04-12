@@ -20,11 +20,11 @@ async function goToList() {
 
 <template>
   <Details
-    :favoriteTeamId="favoriteTeamId"
-    :isLoadingMatches="isLoadingMatches"
-    :teamMatches="teamMatches"
-    :selectedTeam="selectedTeam"
-    @goBack="goToList"
-    @toggleFavoriteTeam="toggleFavoriteTeam"
+    :favorite-team-id="favoriteTeamId"
+    :is-loading-matches="isLoadingMatches"
+    :team-matches="teamMatches"
+    :selected-team="selectedTeam"
+    @go-back="goToList"
+    @toggle-favorite-team="toggleFavoriteTeam"
   />
 </template>

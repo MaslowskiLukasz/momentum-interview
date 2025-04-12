@@ -32,9 +32,9 @@ const emit = defineEmits(['cancel', 'save']);
         </div>
 
         <div class="flex items-center justify-center space-x-4">
-          <ScoreInput label="Home Score" v-model="homeScore" />
+          <ScoreInput v-model="homeScore" label="Home Score" />
           <div class="text-xl font-bold dark:text-white">-</div>
-          <ScoreInput label="Away Score" v-model="awayScore" />
+          <ScoreInput v-model="awayScore" label="Away Score" />
         </div>
       </div>
     </template>

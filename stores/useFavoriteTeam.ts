@@ -12,7 +12,7 @@ export const useFavoriteTeamStore = defineStore('favoriteTeam', () => {
     }
   };
 
-  const toggleFavoriteTeam = (team: Team) => {
+  const toggleFavoriteTeam = (team: TeamWithStats) => {
     if (favoriteTeamId.value === team.id) {
       favoriteTeamId.value = null;
       localStorage.removeItem('favoriteTeamId');
@@ -22,7 +22,7 @@ export const useFavoriteTeamStore = defineStore('favoriteTeam', () => {
     }
   };
 
-  const favoriteTeam = computed(() => {
+  const favoriteTeam = computed<TeamWithStats | undefined | null>(() => {
     if (!favoriteTeamId.value || !teams.value.length) return null;
     return teams.value.find((team) => team.id === favoriteTeamId.value);
   });

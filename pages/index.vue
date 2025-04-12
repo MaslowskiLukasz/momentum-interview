@@ -18,15 +18,15 @@ async function goToDetails(team: TeamWithStats) {
   <div>
     <List
       :teams="teams"
-      :favoriteTeamId="favoriteTeamId"
-      @selectTeam="goToDetails"
-      @toggleFavoriteTeam="toggleFavoriteTeam"
+      :favorite-team-id="favoriteTeamId"
+      @select-team="goToDetails"
+      @toggle-favorite-team="toggleFavoriteTeam"
     />
     <FavoriteTeamSection
       v-if="favoriteTeam"
-      :favoriteTeam="favoriteTeam"
-      :favoriteTeamRecentMatches="favoriteTeamRecentMatches"
-      @openDetails="goToDetails"
+      :favorite-team="favoriteTeam"
+      :favorite-team-recent-matches="favoriteTeamRecentMatches"
+      @open-details="goToDetails"
     />
   </div>
 </template>

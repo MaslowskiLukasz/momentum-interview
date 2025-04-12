@@ -20,8 +20,8 @@ const emit = defineEmits(['editTeamInfo']);
         <template #left><Building /></template>
         <template #right>
           <button
-            @click="emit('editTeamInfo')"
             class="ml-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm"
+            @click="emit('editTeamInfo')"
           >
             Edit
           </button>

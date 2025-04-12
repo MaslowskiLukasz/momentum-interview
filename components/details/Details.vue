@@ -39,14 +39,14 @@ const {
         </template>
       </Button>
       <FavoriteButton
-        :isFavorite="favoriteTeamId === selectedTeam.id"
-        @toggleFavorite="emit('toggleFavoriteTeam', selectedTeam)"
+        :is-favorite="favoriteTeamId === selectedTeam.id"
+        @toggle-favorite="emit('toggleFavoriteTeam', selectedTeam)"
       />
     </div>
 
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
       <TeamDetailsHeader :team="selectedTeam" />
-      <TeamInfo :team="selectedTeam" @editTeamInfo="startEditingTeamDetails" />
+      <TeamInfo :team="selectedTeam" @edit-team-info="startEditingTeamDetails" />
       <div class="p-6 border-t border-gray-200 dark:border-gray-700">
         <h3 class="text-xl font-semibold mb-4 dark:text-white">All Matches</h3>
         <SuccessBanner v-if="showEditSuccess" />
@@ -57,7 +57,7 @@ const {
           <SeasonSummary :team="selectedTeam" />
           <MatchesTable
             :matches="teamMatches"
-            @editMatch="(match) => startEditingMatch(match)"
+            @edit-match="(match) => startEditingMatch(match)"
           />
         </div>
       </div>
@@ -66,9 +66,9 @@ const {
 
   <MatchResultModal
     v-if="isEditingResult"
-    v-model:homeScore="editHomeScore"
-    v-model:awayScore="editAwayScore"
-    :editingMatch="editingMatch"
+    v-model:home-score="editHomeScore"
+    v-model:away-score="editAwayScore"
+    :editing-match="editingMatch"
     @cancel="cancelEditMatch"
     @save="saveMatchResult"
   />

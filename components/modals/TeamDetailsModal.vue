@@ -9,11 +9,11 @@ const emit = defineEmits(['cancel', 'save']);
   <Modal title="Edit Team Details">
     <template #content>
       <div class="space-y-4 mb-6">
-        <TextInput label="Coach" placeholder="Coach name" v-model="coach" />
+        <TextInput v-model="coach" label="Coach" placeholder="Coach name" />
         <TextInput
+          v-model="stadium"
           label="Stadium"
           placeholder="Stadium name"
-          v-model="stadium"
         />
       </div>
     </template>

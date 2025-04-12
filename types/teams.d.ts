@@ -44,3 +44,15 @@ interface TeamWithStats extends Team {
   recentForm: Result[];
   position: number;
 }
+
+type SortField =
+  | 'position'
+  | 'name'
+  | 'points'
+  | 'wins'
+  | 'draws'
+  | 'losses'
+  | 'goalsFor'
+  | 'goalsAgainst';
+
+type SortDirection = 'asc' | 'desc';

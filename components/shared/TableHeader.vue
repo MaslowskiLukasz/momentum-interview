@@ -1,12 +1,20 @@
-<script setup>
+<script lang="ts" setup>
+interface Props {
+  text: string;
+  isSorted?: boolean;
+  sortDirection?: SortDirection;
+  isHoverable?: boolean;
+}
 const {
   text,
   isSorted = false,
   sortDirection = 'asc',
   isHoverable = true,
-} = defineProps(['text', 'isSorted', 'sortDirection', 'isHoverable']);
+} = defineProps<Props>();
 
-const emit = defineEmits(['toggleSort']);
+const emit = defineEmits<{
+  toggleSort: [];
+}>();
 </script>
 
 <template>
