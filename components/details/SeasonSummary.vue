@@ -1,5 +1,9 @@
-<script setup>
-const { team } = defineProps(['team']);
+<script lang="ts" setup>
+interface Props {
+  team: TeamWithStats;
+}
+
+const { team } = defineProps<Props>();
 
 const gamesPlayed = computed(() => {
   return team.wins + team.draws + team.losses;
