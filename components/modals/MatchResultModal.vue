@@ -1,10 +1,13 @@
-<script setup>
-const { editingMatch } = defineProps(['editingMatch']);
+<script lang="ts" setup>
+interface Props {
+  editingMatch: TeamMatch | null;
+}
+const { editingMatch } = defineProps<Props>();
 
-const homeScore = defineModel('homeScore');
-const awayScore = defineModel('awayScore');
+const homeScore = defineModel<number>('homeScore');
+const awayScore = defineModel<number>('awayScore');
 
-const emit = defineEmits(['cancel', 'save']);
+const emit = defineEmits<{ cancel: []; save: [] }>();
 </script>
 
 <template>
