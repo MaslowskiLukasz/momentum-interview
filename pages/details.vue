@@ -12,7 +12,7 @@ const favoriteTeamStore = useFavoriteTeamStore();
 const { favoriteTeamId } = storeToRefs(favoriteTeamStore);
 const { toggleFavoriteTeam } = favoriteTeamStore;
 
-async function goToList() {
+async function goToList(): Promise<void> {
   await navigateTo('/');
   resetSelectedTeam();
 }

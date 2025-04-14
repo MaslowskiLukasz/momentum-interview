@@ -8,7 +8,7 @@ const { favoriteTeamId, favoriteTeam, favoriteTeamRecentMatches } =
   storeToRefs(favoriteTeamStore);
 const { toggleFavoriteTeam } = favoriteTeamStore;
 
-async function goToDetails(team: TeamWithStats) {
+async function goToDetails(team: TeamWithStats): Promise<void> {
   selectTeam(team);
   await navigateTo('/details');
 }

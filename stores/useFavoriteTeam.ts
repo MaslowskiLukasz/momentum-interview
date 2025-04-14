@@ -5,14 +5,14 @@ export const useFavoriteTeamStore = defineStore('favoriteTeam', () => {
   const { teams } = storeToRefs(store);
   const { getTeamMatches } = store;
 
-  const loadFavoriteTeam = () => {
+  const loadFavoriteTeam = (): void => {
     const savedFavoriteTeamId = localStorage.getItem('favoriteTeamId');
     if (savedFavoriteTeamId) {
       favoriteTeamId.value = parseInt(savedFavoriteTeamId);
     }
   };
 
-  const toggleFavoriteTeam = (team: TeamWithStats) => {
+  const toggleFavoriteTeam = (team: TeamWithStats): void => {
     if (favoriteTeamId.value === team.id) {
       favoriteTeamId.value = null;
       localStorage.removeItem('favoriteTeamId');

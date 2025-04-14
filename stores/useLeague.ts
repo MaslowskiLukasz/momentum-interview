@@ -65,7 +65,7 @@ export const useLeagueStore = defineStore('league', () => {
     });
   }
 
-  const selectTeam = async (team: TeamWithStats) => {
+  const selectTeam = async (team: TeamWithStats): Promise<void> => {
     selectedTeam.value = team;
     isLoadingMatches.value = true;
 
@@ -80,7 +80,7 @@ export const useLeagueStore = defineStore('league', () => {
     }
   };
 
-  const resetSelectedTeam = () => {
+  const resetSelectedTeam = (): void => {
     selectedTeam.value = null;
   };
 

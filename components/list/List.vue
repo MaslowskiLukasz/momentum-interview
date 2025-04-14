@@ -52,7 +52,7 @@ const gamesPlayed = computed(() => {
   };
 });
 
-function toggleSortDirection(field: SortField) {
+function toggleSortDirection(field: SortField): void {
   if (sortBy.value === field) {
     // Toggle direction if clicking the same field
     sortDirection.value = sortDirection.value === 'asc' ? 'desc' : 'asc';
