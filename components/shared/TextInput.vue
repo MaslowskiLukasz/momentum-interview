@@ -1,6 +1,11 @@
-<script setup>
-const { label, placeholder } = defineProps(['label', 'placeholder']);
-const model = defineModel();
+<script lang="ts" setup>
+interface Props {
+  label: string;
+  placeholder: string;
+}
+
+const { label, placeholder } = defineProps<Props>();
+const model = defineModel<string>();
 </script>
 
 <template>
