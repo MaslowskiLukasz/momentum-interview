@@ -1,5 +1,8 @@
-<script setup>
-const { matches } = defineProps(['matches']);
+<script lang="ts" setup>
+interface Props {
+  matches: Result[];
+}
+const { matches } = defineProps<Props>();
 </script>
 
 <template>

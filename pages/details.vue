@@ -25,6 +25,6 @@ async function goToList() {
     :team-matches="teamMatches"
     :selected-team="selectedTeam"
     @go-back="goToList"
-    @toggle-favorite-team="toggleFavoriteTeam"
+    @toggle-favorite-team="(team) => toggleFavoriteTeam(team)"
   />
 </template>

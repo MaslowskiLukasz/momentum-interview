@@ -1,4 +1,4 @@
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware((to, _) => {
   const leagueStore = useLeagueStore();
   const { selectedTeam } = storeToRefs(leagueStore);
 

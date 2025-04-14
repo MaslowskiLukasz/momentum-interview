@@ -1,5 +1,9 @@
-<script setup>
-const { label, value } = defineProps(['label', 'value']);
+<script lang="ts" setup>
+interface Props {
+  label: string;
+  value: string | number;
+}
+const { label, value } = defineProps<Props>();
 </script>
 
 <template>

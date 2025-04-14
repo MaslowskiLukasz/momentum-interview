@@ -1,6 +1,12 @@
-<script setup>
-const { matches } = defineProps(['matches']);
-const emit = defineEmits(['editMatch']);
+<script lang="ts" setup>
+interface Props {
+  matches: TeamMatch[];
+}
+
+const { matches } = defineProps<Props>();
+const emit = defineEmits<{
+  editMatch: [match: TeamMatch];
+}>();
 </script>
 
 <template>

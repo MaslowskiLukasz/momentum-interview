@@ -1,26 +1,37 @@
-export const useEditResult = () => {
+interface UseEditResult {
+  editHomeScore: Ref<number>;
+  editAwayScore: Ref<number>;
+  editingMatch: Ref<TeamMatch | null>;
+  isEditingResult: Ref<boolean>;
+  showEditSuccess: Ref<boolean>;
+  startEditingMatch: (match: TeamMatch) => void;
+  cancelEditMatch: () => void;
+  saveMatchResult: () => void;
+}
+
+export const useEditResult = (): UseEditResult => {
   const editHomeScore = ref(0);
   const editAwayScore = ref(0);
-  const editingMatch = ref(null);
+  const editingMatch = ref<TeamMatch | null>(null);
   const isEditingResult = ref(false);
   const showEditSuccess = ref(false);
 
   const store = useLeagueStore();
   const { allMatches, teamMatches, teams, selectedTeam } = storeToRefs(store);
 
-  const startEditingMatch = (match) => {
+  const startEditingMatch = (match: TeamMatch): void => {
     editingMatch.value = { ...match };
     editHomeScore.value = match.homeScore;
     editAwayScore.value = match.awayScore;
     isEditingResult.value = true;
   };
 
-  const cancelEditMatch = () => {
+  const cancelEditMatch = (): void => {
     isEditingResult.value = false;
     editingMatch.value = null;
   };
 
-  const saveMatchResult = () => {
+  const saveMatchResult = (): void => {
     if (!editingMatch.value) return;
 
     // Validate scores
@@ -36,19 +47,9 @@ export const useEditResult = () => {
 
     // Find the match in allMatches
     const matchIndex = allMatches.value.findIndex(
-      (m) => m.id === editingMatch.value.id
+      (m) => m.id === editingMatch.value?.id
     );
     if (matchIndex === -1) return;
-
-    // Get the teams involved
-    const homeTeamId = allMatches.value[matchIndex].homeTeamId;
-    const awayTeamId = allMatches.value[matchIndex].awayTeamId;
-    const homeTeam = teams.value.find((t) => t.id === homeTeamId);
-    const awayTeam = teams.value.find((t) => t.id === awayTeamId);
-
-    // Store original scores for comparison
-    const originalHomeScore = allMatches.value[matchIndex].homeScore;
-    const originalAwayScore = allMatches.value[matchIndex].awayScore;
 
     // Update the match scores
     allMatches.value[matchIndex].homeScore = editHomeScore.value;
@@ -56,7 +57,7 @@ export const useEditResult = () => {
 
     // Update the formatted match in teamMatches
     const teamMatchIndex = teamMatches.value.findIndex(
-      (m) => m.id === editingMatch.value.id
+      (m) => m.id === editingMatch.value?.id
     );
     if (teamMatchIndex !== -1) {
       const updatedMatch = { ...teamMatches.value[teamMatchIndex] };
@@ -126,7 +127,7 @@ export const useEditResult = () => {
     // Update the selected team reference to reflect the new stats
     if (selectedTeam.value) {
       const updatedSelectedTeam = teams.value.find(
-        (t) => t.id === selectedTeam.value.id
+        (t) => t.id === selectedTeam.value?.id
       );
       if (updatedSelectedTeam) {
         selectedTeam.value = updatedSelectedTeam;

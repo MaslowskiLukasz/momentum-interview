@@ -1,8 +1,8 @@
-<script setup>
-const coach = defineModel('coach');
-const stadium = defineModel('stadium');
+<script lang="ts" setup>
+const coach = defineModel<string>('coach');
+const stadium = defineModel<string>('stadium');
 
-const emit = defineEmits(['cancel', 'save']);
+const emit = defineEmits<{ cancel: []; save: [] }>();
 </script>
 
 <template>

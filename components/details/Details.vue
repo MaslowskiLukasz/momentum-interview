@@ -1,13 +1,18 @@
-<script setup>
-const { favoriteTeamId, isLoadingMatches, teamMatches, selectedTeam } =
-  defineProps([
-    'favoriteTeamId',
-    'isLoadingMatches',
-    'teamMatches',
-    'selectedTeam',
-  ]);
+<script lang="ts" setup>
+interface Props {
+  favoriteTeamId: number | null;
+  isLoadingMatches: boolean;
+  teamMatches: TeamMatch[];
+  selectedTeam: TeamWithStats;
+}
 
-const emit = defineEmits(['goBack', 'toggleFavoriteTeam']);
+const { favoriteTeamId, isLoadingMatches, teamMatches, selectedTeam } =
+  defineProps<Props>();
+
+const emit = defineEmits<{
+  goBack: [];
+  toggleFavoriteTeam: [team: TeamWithStats];
+}>();
 
 const {
   isEditingTeamDetails,
@@ -46,7 +51,10 @@ const {
 
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
       <TeamDetailsHeader :team="selectedTeam" />
-      <TeamInfo :team="selectedTeam" @edit-team-info="startEditingTeamDetails" />
+      <TeamInfo
+        :team="selectedTeam"
+        @edit-team-info="startEditingTeamDetails"
+      />
       <div class="p-6 border-t border-gray-200 dark:border-gray-700">
         <h3 class="text-xl font-semibold mb-4 dark:text-white">All Matches</h3>
         <SuccessBanner v-if="showEditSuccess" />
