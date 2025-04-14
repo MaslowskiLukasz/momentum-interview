@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 const leagueStore = useLeagueStore();
 const { teams } = storeToRefs(leagueStore);
 const { selectTeam } = leagueStore;
@@ -8,7 +8,7 @@ const { favoriteTeamId, favoriteTeam, favoriteTeamRecentMatches } =
   storeToRefs(favoriteTeamStore);
 const { toggleFavoriteTeam } = favoriteTeamStore;
 
-async function goToDetails(team) {
+async function goToDetails(team: TeamWithStats): Promise<void> {
   selectTeam(team);
   await navigateTo('/details');
 }
@@ -18,15 +18,15 @@ async function goToDetails(team) {
   <div>
     <List
       :teams="teams"
-      :favoriteTeamId="favoriteTeamId"
-      @selectTeam="goToDetails"
-      @toggleFavoriteTeam="toggleFavoriteTeam"
+      :favorite-team-id="favoriteTeamId"
+      @select-team="(team) => goToDetails(team)"
+      @toggle-favorite-team="(team) => toggleFavoriteTeam(team)"
     />
     <FavoriteTeamSection
       v-if="favoriteTeam"
-      :favoriteTeam="favoriteTeam"
-      :favoriteTeamRecentMatches="favoriteTeamRecentMatches"
-      @openDetails="goToDetails"
+      :favorite-team="favoriteTeam"
+      :favorite-team-recent-matches="favoriteTeamRecentMatches"
+      @open-details="(team) => goToDetails(team)"
     />
   </div>
 </template>

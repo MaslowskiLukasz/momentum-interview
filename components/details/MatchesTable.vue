@@ -1,6 +1,12 @@
-<script setup>
-const { matches } = defineProps(['matches']);
-const emit = defineEmits(['editMatch']);
+<script lang="ts" setup>
+interface Props {
+  matches: TeamMatch[];
+}
+
+const { matches } = defineProps<Props>();
+const emit = defineEmits<{
+  editMatch: [match: TeamMatch];
+}>();
 </script>
 
 <template>
@@ -8,10 +14,10 @@ const emit = defineEmits(['editMatch']);
     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
       <thead class="bg-gray-50 dark:bg-gray-700">
         <tr>
-          <TableHeader text="Date" :isHoverable="false" />
-          <TableHeader text="Match" :isHoverable="false" />
-          <TableHeader text="Result" :isHoverable="false" />
-          <TableHeader text="Actions" :isHoverable="false" />
+          <TableHeader text="Date" :is-hoverable="false" />
+          <TableHeader text="Match" :is-hoverable="false" />
+          <TableHeader text="Result" :is-hoverable="false" />
+          <TableHeader text="Actions" :is-hoverable="false" />
         </tr>
       </thead>
       <tbody

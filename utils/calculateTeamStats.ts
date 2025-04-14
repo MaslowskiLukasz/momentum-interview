@@ -1,6 +1,9 @@
-export function calculateTeamStats(teamsData, matches) {
+export function calculateTeamStats(
+  teamsData: Team[],
+  matches: Match[]
+): TeamWithStats[] {
   // Create a map to store team stats
-  const teamStats = {};
+  const teamStats: Record<number, TeamWithStats> = {};
 
   // Initialize stats for each team - ensure points start at exactly 0
   teamsData.forEach((team) => {
@@ -13,6 +16,7 @@ export function calculateTeamStats(teamsData, matches) {
       goalsFor: 0,
       goalsAgainst: 0,
       recentForm: [],
+      position: 0,
     };
   });
 

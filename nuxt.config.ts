@@ -30,5 +30,5 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2025-03-14',
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', '@nuxt/eslint'],
 });

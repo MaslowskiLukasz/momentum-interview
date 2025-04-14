@@ -1,28 +1,28 @@
 export const useFavoriteTeamStore = defineStore('favoriteTeam', () => {
-  const favoriteTeamId = ref(null);
+  const favoriteTeamId = ref<number | null>(null);
 
   const store = useLeagueStore();
   const { teams } = storeToRefs(store);
   const { getTeamMatches } = store;
 
-  const loadFavoriteTeam = () => {
+  const loadFavoriteTeam = (): void => {
     const savedFavoriteTeamId = localStorage.getItem('favoriteTeamId');
     if (savedFavoriteTeamId) {
       favoriteTeamId.value = parseInt(savedFavoriteTeamId);
     }
   };
 
-  const toggleFavoriteTeam = (team) => {
+  const toggleFavoriteTeam = (team: TeamWithStats): void => {
     if (favoriteTeamId.value === team.id) {
       favoriteTeamId.value = null;
       localStorage.removeItem('favoriteTeamId');
     } else {
       favoriteTeamId.value = team.id;
-      localStorage.setItem('favoriteTeamId', team.id);
+      localStorage.setItem('favoriteTeamId', team.id.toString());
     }
   };
 
-  const favoriteTeam = computed(() => {
+  const favoriteTeam = computed<TeamWithStats | undefined | null>(() => {
     if (!favoriteTeamId.value || !teams.value.length) return null;
     return teams.value.find((team) => team.id === favoriteTeamId.value);
   });

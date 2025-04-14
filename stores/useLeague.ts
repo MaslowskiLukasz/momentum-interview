@@ -1,13 +1,16 @@
 import { defineStore } from 'pinia';
 
 export const useLeagueStore = defineStore('league', () => {
-  const allMatches = ref([]);
-  const teamMatches = ref([]);
-  const teams = ref([]);
-  const selectedTeam = ref(null);
+  const allMatches = ref<Match[]>([]);
+  const teamMatches = ref<TeamMatch[]>([]);
+  const teams = ref<TeamWithStats[]>([]);
+  const selectedTeam = ref<TeamWithStats | null>(null);
   const isLoadingMatches = ref(false);
 
-  function getTeamMatches(teamId, limit = null) {
+  function getTeamMatches(
+    teamId: number | null,
+    limit: number | null = null
+  ): TeamMatch[] {
     if (!teamId || !allMatches.value.length) return [];
 
     // Filter matches for the team
@@ -17,7 +20,7 @@ export const useLeagueStore = defineStore('league', () => {
 
     // Sort matches by date (most recent first)
     const sortedMatches = [...matches].sort(
-      (a, b) => new Date(b.date) - new Date(a.date)
+      (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf()
     );
 
     // Apply limit if provided
@@ -32,7 +35,7 @@ export const useLeagueStore = defineStore('league', () => {
       const awayTeamObj = teams.value.find((t) => t.id === match.awayTeamId);
 
       // Determine result for the team
-      let result;
+      let result: Result;
       if (isHome) {
         result =
           match.homeScore > match.awayScore
@@ -62,7 +65,7 @@ export const useLeagueStore = defineStore('league', () => {
     });
   }
 
-  const selectTeam = async (team) => {
+  const selectTeam = async (team: TeamWithStats): Promise<void> => {
     selectedTeam.value = team;
     isLoadingMatches.value = true;
 
@@ -77,8 +80,8 @@ export const useLeagueStore = defineStore('league', () => {
     }
   };
 
-  const resetSelectedTeam = () => {
-    selectTeam.value = null;
+  const resetSelectedTeam = (): void => {
+    selectedTeam.value = null;
   };
 
   return {

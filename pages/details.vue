@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 definePageMeta({
   middleware: ['details-middleware'],
 });
@@ -12,19 +12,19 @@ const favoriteTeamStore = useFavoriteTeamStore();
 const { favoriteTeamId } = storeToRefs(favoriteTeamStore);
 const { toggleFavoriteTeam } = favoriteTeamStore;
 
-async function goToList() {
-  resetSelectedTeam();
+async function goToList(): Promise<void> {
   await navigateTo('/');
+  resetSelectedTeam();
 }
 </script>
 
 <template>
   <Details
-    :favoriteTeamId="favoriteTeamId"
-    :isLoadingMatches="isLoadingMatches"
-    :teamMatches="teamMatches"
-    :selectedTeam="selectedTeam"
-    @goBack="goToList"
-    @toggleFavoriteTeam="toggleFavoriteTeam"
+    :favorite-team-id="favoriteTeamId"
+    :is-loading-matches="isLoadingMatches"
+    :team-matches="teamMatches"
+    :selected-team="selectedTeam"
+    @go-back="goToList"
+    @toggle-favorite-team="(team) => toggleFavoriteTeam(team)"
   />
 </template>

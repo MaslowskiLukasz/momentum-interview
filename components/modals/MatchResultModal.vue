@@ -1,10 +1,13 @@
-<script setup>
-const { editingMatch } = defineProps(['editingMatch']);
+<script lang="ts" setup>
+interface Props {
+  editingMatch: TeamMatch | null;
+}
+const { editingMatch } = defineProps<Props>();
 
-const homeScore = defineModel('homeScore');
-const awayScore = defineModel('awayScore');
+const homeScore = defineModel<number>('homeScore');
+const awayScore = defineModel<number>('awayScore');
 
-const emit = defineEmits(['cancel', 'save']);
+const emit = defineEmits<{ cancel: []; save: [] }>();
 </script>
 
 <template>
@@ -32,9 +35,9 @@ const emit = defineEmits(['cancel', 'save']);
         </div>
 
         <div class="flex items-center justify-center space-x-4">
-          <ScoreInput label="Home Score" v-model="homeScore" />
+          <ScoreInput v-model="homeScore" label="Home Score" />
           <div class="text-xl font-bold dark:text-white">-</div>
-          <ScoreInput label="Away Score" v-model="awayScore" />
+          <ScoreInput v-model="awayScore" label="Away Score" />
         </div>
       </div>
     </template>

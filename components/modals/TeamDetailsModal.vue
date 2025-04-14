@@ -1,19 +1,19 @@
-<script setup>
-const coach = defineModel('coach');
-const stadium = defineModel('stadium');
+<script lang="ts" setup>
+const coach = defineModel<string>('coach');
+const stadium = defineModel<string>('stadium');
 
-const emit = defineEmits(['cancel', 'save']);
+const emit = defineEmits<{ cancel: []; save: [] }>();
 </script>
 
 <template>
   <Modal title="Edit Team Details">
     <template #content>
       <div class="space-y-4 mb-6">
-        <TextInput label="Coach" placeholder="Coach name" v-model="coach" />
+        <TextInput v-model="coach" label="Coach" placeholder="Coach name" />
         <TextInput
+          v-model="stadium"
           label="Stadium"
           placeholder="Stadium name"
-          v-model="stadium"
         />
       </div>
     </template>

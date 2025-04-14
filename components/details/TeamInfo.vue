@@ -1,6 +1,10 @@
-<script setup>
-const { team } = defineProps(['team']);
-const emit = defineEmits(['editTeamInfo']);
+<script lang="ts" setup>
+interface Props {
+  team: TeamWithStats;
+}
+
+const { team } = defineProps<Props>();
+const emit = defineEmits<{ editTeamInfo: [] }>();
 </script>
 
 <template>
@@ -8,7 +12,7 @@ const emit = defineEmits(['editTeamInfo']);
     <div
       class="flex flex-col md:flex-row md:justify-between md:items-start gap-6"
     >
-      <TeamDetails :team="team" @editTeamInfo="emit('editTeamInfo')" />
+      <TeamDetails :team="team" @edit-team-info="emit('editTeamInfo')" />
       <TeamStats :team="team" />
     </div>
   </div>

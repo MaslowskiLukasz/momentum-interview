@@ -1,6 +1,13 @@
-<script setup>
-const { label, type } = defineProps(['label', 'type']);
-const emit = defineEmits(['click']);
+<script lang="ts" setup>
+type ButtonType = 'primary' | 'secondary' | 'ghost';
+
+interface Props {
+  label: string;
+  type?: ButtonType;
+}
+
+const { label, type } = defineProps<Props>();
+const emit = defineEmits<{ click: [] }>();
 
 const style = computed(() => {
   switch (type) {
@@ -17,7 +24,7 @@ const style = computed(() => {
 </script>
 
 <template>
-  <button @click="emit('click')" class="flex items-center" :class="style">
+  <button class="flex items-center" :class="style" @click="emit('click')">
     <slot name="left" />
     {{ label }}
   </button>
