@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 interface Props {
-  favoriteTeamId: number;
+  favoriteTeamId: number | null;
   isLoadingMatches: boolean;
   teamMatches: TeamMatch[];
   selectedTeam: TeamWithStats;
